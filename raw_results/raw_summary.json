@@ -1,0 +1,445 @@
+{
+  "file": "data.bin",
+  "samples": 125000,
+  "sample_bits": 8,
+  "config": {
+    "data": "data.bin",
+    "report_only": null,
+    "no_report": false,
+    "out": "raw_results",
+    "v3": null,
+    "sample_bits": 8,
+    "packed": false,
+    "max_bytes": null,
+    "skip_diagnostics": false,
+    "skip_90b": false,
+    "skip_nist": false,
+    "skip_dieharder": false,
+    "skip_practrand": false,
+    "testu01": "small",
+    "force_suites": false,
+    "chunks": 1,
+    "samples_per_chunk": 1000000,
+    "no_iid": false,
+    "restart_file": null,
+    "claimed_h": null,
+    "seq_len": 1000000,
+    "nist_max_seq": 50,
+    "alpha": 0.01,
+    "workers": null,
+    "skip_linear_complexity": false,
+    "diag_max": 50000000
+  },
+  "stages": {
+    "diagnostics": "ran",
+    "sp800_90b": "skipped (fewer than 1,000,000 samples, or tools not installed)",
+    "nist": "ran",
+    "dieharder": "skipped (insufficient data: 0.1 MB, needs about 100 MB)",
+    "practrand": "ran",
+    "testu01": "skipped (insufficient data: 0.1 MB, needs about 944 MB)"
+  },
+  "diagnostics": {
+    "n": 125000,
+    "k": 256,
+    "shannon": 7.998414606758859,
+    "shannon_eff": 0.9998018258448573,
+    "pmax": 0.004464,
+    "mcv_min_entropy": 7.658438287823856,
+    "mcv_per_bit": 0.957304785977982,
+    "chi2": 275.15648,
+    "chi2_p": 0.18422211096174343,
+    "lags": [
+      [
+        1,
+        0.0022200673841042753,
+        0.43250495999297384
+      ],
+      [
+        2,
+        -0.0037972413797076774,
+        0.17942499897949712
+      ],
+      [
+        3,
+        -0.0030380870270570563,
+        0.2827662266841812
+      ],
+      [
+        4,
+        -0.0009598375623438172,
+        0.7343431994661918
+      ],
+      [
+        5,
+        -0.0013223002986961566,
+        0.6401395069089483
+      ],
+      [
+        6,
+        -0.0016270974013084007,
+        0.5651115454893456
+      ],
+      [
+        7,
+        0.0038809116206167085,
+        0.17002936432602173
+      ],
+      [
+        8,
+        -0.0010475277339093685,
+        0.711116521833884
+      ],
+      [
+        9,
+        -0.0016979643991941594,
+        0.5482922789721045
+      ],
+      [
+        10,
+        0.0024607637665157093,
+        0.38429418896528295
+      ],
+      [
+        11,
+        0.0018094458084932233,
+        0.5223444413827747
+      ],
+      [
+        12,
+        0.0009169131278900617,
+        0.7458034697945669
+      ],
+      [
+        13,
+        0.003227195842422674,
+        0.2538757356131728
+      ],
+      [
+        14,
+        0.0004348629210684592,
+        0.8778090195266812
+      ],
+      [
+        15,
+        0.002971097516660556,
+        0.29351512754838366
+      ],
+      [
+        16,
+        0.0008380539765994055,
+        0.7670034104938468
+      ]
+    ],
+    "longest_run": 3,
+    "expected_longest_run": 3.115740250772879,
+    "homogeneity_p": 0.27121764878163723,
+    "homogeneity_low_expected": false,
+    "compression": {
+      "zlib-9": 1.000368,
+      "bz2": 1.007432,
+      "lzma": 1.000544
+    }
+  },
+  "stream_size": 125000,
+  "nist_800_22": {
+    "records": [
+      {
+        "test": "01 Frequency (Monobit)",
+        "n_p": 1,
+        "proportion": 0.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "FAIL"
+      },
+      {
+        "test": "02 Block Frequency",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "03 Runs",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "04 Longest Run of Ones",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "05 Binary Matrix Rank",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "06 DFT (Spectral)",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "07 Non-overlapping Template",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "08 Overlapping Template",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "09 Maurer's Universal",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "10 Linear Complexity",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "11 Serial #1",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "11 Serial #2",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "12 Approximate Entropy",
+        "n_p": 1,
+        "proportion": 1.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "PASS"
+      },
+      {
+        "test": "13 Cumulative Sums #1",
+        "n_p": 1,
+        "proportion": 0.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "FAIL"
+      },
+      {
+        "test": "13 Cumulative Sums #2",
+        "n_p": 1,
+        "proportion": 0.0,
+        "uniformity_P": 0.43727418891386727,
+        "verdict": "FAIL"
+      },
+      {
+        "test": "14 Random Excursions #1",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "14 Random Excursions #2",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "14 Random Excursions #3",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "14 Random Excursions #4",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "14 Random Excursions #5",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "14 Random Excursions #6",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "14 Random Excursions #7",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "14 Random Excursions #8",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #1",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #10",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #11",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #12",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #13",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #14",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #15",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #16",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #17",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #18",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #2",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #3",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #4",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #5",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #6",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #7",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #8",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      },
+      {
+        "test": "15 Random Excursions Variant #9",
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
+      }
+    ],
+    "n_seq": 1,
+    "seq_len": 1000000,
+    "alpha": 0.01,
+    "n_pass": 12,
+    "n_tests": 41,
+    "fail": [
+      "01 Frequency (Monobit)",
+      "13 Cumulative Sums #1",
+      "13 Cumulative Sums #2"
+    ]
+  }
+}

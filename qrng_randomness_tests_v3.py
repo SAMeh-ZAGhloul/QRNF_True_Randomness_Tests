@@ -654,6 +654,7 @@ int main(int argc, char **argv) {
     else if (argv[2][0] == 'c') bbattery_Crush(gen);
     else                        bbattery_BigCrush(gen);
     unif01_DeleteExternGenBits(gen);
+    fflush(stdout);
     fprintf(stderr, "\nFILE REWINDS: %lu (must be 0 for a valid run)\n", rewinds);
     return 0;
 }
