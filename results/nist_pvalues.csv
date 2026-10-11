@@ -1,0 +1,1067 @@
+test,seq,p
+01 Frequency (Monobit),0,0.6443018227005316
+02 Block Frequency,0,0.44746106296770044
+03 Runs,0,0.32040236387174104
+04 Longest Run of Ones,0,0.604866819760619
+05 Binary Matrix Rank,0,0.0017593660041187876
+06 DFT (Spectral),0,0.749567615602637
+07 Non-overlapping Template,0,0.2638625702566793
+08 Overlapping Template,0,0.7467433788521994
+09 Maurer's Universal,0,
+10 Linear Complexity,0,0.5736280875279443
+11 Serial #1,0,0.06756938041570375
+11 Serial #2,0,0.139768346328432
+12 Approximate Entropy,0,0.4360407652214015
+13 Cumulative Sums #1,0,0.34175225234939344
+13 Cumulative Sums #2,0,0.7152690266407815
+14 Random Excursions #1,0,
+14 Random Excursions #2,0,
+14 Random Excursions #3,0,
+14 Random Excursions #4,0,
+14 Random Excursions #5,0,
+14 Random Excursions #6,0,
+14 Random Excursions #7,0,
+14 Random Excursions #8,0,
+15 Random Excursions Variant #1,0,
+15 Random Excursions Variant #2,0,
+15 Random Excursions Variant #3,0,
+15 Random Excursions Variant #4,0,
+15 Random Excursions Variant #5,0,
+15 Random Excursions Variant #6,0,
+15 Random Excursions Variant #7,0,
+15 Random Excursions Variant #8,0,
+15 Random Excursions Variant #9,0,
+15 Random Excursions Variant #10,0,
+15 Random Excursions Variant #11,0,
+15 Random Excursions Variant #12,0,
+15 Random Excursions Variant #13,0,
+15 Random Excursions Variant #14,0,
+15 Random Excursions Variant #15,0,
+15 Random Excursions Variant #16,0,
+15 Random Excursions Variant #17,0,
+15 Random Excursions Variant #18,0,
+01 Frequency (Monobit),1,0.5437465194599174
+02 Block Frequency,1,0.7026938529341744
+03 Runs,1,0.4116294785943442
+04 Longest Run of Ones,1,0.9535131401000861
+05 Binary Matrix Rank,1,0.5024785847960784
+06 DFT (Spectral),1,0.5813855788250666
+07 Non-overlapping Template,1,0.3348847674474908
+08 Overlapping Template,1,0.3866888663238741
+09 Maurer's Universal,1,
+10 Linear Complexity,1,0.6496313517825318
+11 Serial #1,1,0.5664730950385681
+11 Serial #2,1,0.6500705330236395
+12 Approximate Entropy,1,0.2230215725663185
+13 Cumulative Sums #1,1,0.9050484200334243
+13 Cumulative Sums #2,1,0.6590412353311246
+14 Random Excursions #1,1,0.4578020510458298
+14 Random Excursions #2,1,0.6197522106961159
+14 Random Excursions #3,1,0.8282568087933766
+14 Random Excursions #4,1,0.5881071239516015
+14 Random Excursions #5,1,0.6465482996206292
+14 Random Excursions #6,1,0.6933972647757141
+14 Random Excursions #7,1,0.4155095937952001
+14 Random Excursions #8,1,0.9134028365753016
+15 Random Excursions Variant #1,1,0.892979885505748
+15 Random Excursions Variant #2,1,0.8187470791107733
+15 Random Excursions Variant #3,1,0.7700513779194235
+15 Random Excursions Variant #4,1,0.7380047021897749
+15 Random Excursions Variant #5,1,0.4880740931652482
+15 Random Excursions Variant #6,1,0.43174234368243325
+15 Random Excursions Variant #7,1,0.9406755262610108
+15 Random Excursions Variant #8,1,0.553533113029543
+15 Random Excursions Variant #9,1,0.6372871703235983
+15 Random Excursions Variant #10,1,0.5056410821987828
+15 Random Excursions Variant #11,1,0.5218393903336154
+15 Random Excursions Variant #12,1,0.9406755262610108
+15 Random Excursions Variant #13,1,0.7452050641007344
+15 Random Excursions Variant #14,1,0.3899074016173813
+15 Random Excursions Variant #15,1,0.6942945581391752
+15 Random Excursions Variant #16,1,0.8656151284767578
+15 Random Excursions Variant #17,1,0.7364380656928979
+15 Random Excursions Variant #18,1,0.581228130412935
+01 Frequency (Monobit),2,0.0831084387949897
+02 Block Frequency,2,0.9366026970677152
+03 Runs,2,0.9823313156766067
+04 Longest Run of Ones,2,0.47914470004527476
+05 Binary Matrix Rank,2,0.9152405442836729
+06 DFT (Spectral),2,0.051862134982338395
+07 Non-overlapping Template,2,0.48955553951333497
+08 Overlapping Template,2,0.46438284727763346
+09 Maurer's Universal,2,
+10 Linear Complexity,2,0.17812988474120228
+11 Serial #1,2,0.5462453613596004
+11 Serial #2,2,0.4804945059380495
+12 Approximate Entropy,2,0.814969136396369
+13 Cumulative Sums #1,2,0.10359791420902636
+13 Cumulative Sums #2,2,0.16067179128283726
+14 Random Excursions #1,2,
+14 Random Excursions #2,2,
+14 Random Excursions #3,2,
+14 Random Excursions #4,2,
+14 Random Excursions #5,2,
+14 Random Excursions #6,2,
+14 Random Excursions #7,2,
+14 Random Excursions #8,2,
+15 Random Excursions Variant #1,2,
+15 Random Excursions Variant #2,2,
+15 Random Excursions Variant #3,2,
+15 Random Excursions Variant #4,2,
+15 Random Excursions Variant #5,2,
+15 Random Excursions Variant #6,2,
+15 Random Excursions Variant #7,2,
+15 Random Excursions Variant #8,2,
+15 Random Excursions Variant #9,2,
+15 Random Excursions Variant #10,2,
+15 Random Excursions Variant #11,2,
+15 Random Excursions Variant #12,2,
+15 Random Excursions Variant #13,2,
+15 Random Excursions Variant #14,2,
+15 Random Excursions Variant #15,2,
+15 Random Excursions Variant #16,2,
+15 Random Excursions Variant #17,2,
+15 Random Excursions Variant #18,2,
+01 Frequency (Monobit),3,0.12904130509946815
+02 Block Frequency,3,0.15247586892029596
+03 Runs,3,0.45872292276112653
+04 Longest Run of Ones,3,0.10919847595825663
+05 Binary Matrix Rank,3,0.29233486486392873
+06 DFT (Spectral),3,0.7276685106075956
+07 Non-overlapping Template,3,0.906057888270868
+08 Overlapping Template,3,0.632669325349944
+09 Maurer's Universal,3,
+10 Linear Complexity,3,0.10878836872133218
+11 Serial #1,3,0.10249403838007695
+11 Serial #2,3,0.48590067108161594
+12 Approximate Entropy,3,0.086268495332567
+13 Cumulative Sums #1,3,0.12065482896443622
+13 Cumulative Sums #2,3,0.2394859009199015
+14 Random Excursions #1,3,
+14 Random Excursions #2,3,
+14 Random Excursions #3,3,
+14 Random Excursions #4,3,
+14 Random Excursions #5,3,
+14 Random Excursions #6,3,
+14 Random Excursions #7,3,
+14 Random Excursions #8,3,
+15 Random Excursions Variant #1,3,
+15 Random Excursions Variant #2,3,
+15 Random Excursions Variant #3,3,
+15 Random Excursions Variant #4,3,
+15 Random Excursions Variant #5,3,
+15 Random Excursions Variant #6,3,
+15 Random Excursions Variant #7,3,
+15 Random Excursions Variant #8,3,
+15 Random Excursions Variant #9,3,
+15 Random Excursions Variant #10,3,
+15 Random Excursions Variant #11,3,
+15 Random Excursions Variant #12,3,
+15 Random Excursions Variant #13,3,
+15 Random Excursions Variant #14,3,
+15 Random Excursions Variant #15,3,
+15 Random Excursions Variant #16,3,
+15 Random Excursions Variant #17,3,
+15 Random Excursions Variant #18,3,
+01 Frequency (Monobit),4,0.5270892568655383
+02 Block Frequency,4,0.6143604276415611
+03 Runs,4,0.542905863141405
+04 Longest Run of Ones,4,0.5841440531007001
+05 Binary Matrix Rank,4,0.7921011501271289
+06 DFT (Spectral),4,0.3238153774024426
+07 Non-overlapping Template,4,0.7833240937911338
+08 Overlapping Template,4,0.01413783718647133
+09 Maurer's Universal,4,
+10 Linear Complexity,4,0.802530105735312
+11 Serial #1,4,0.008480187513052516
+11 Serial #2,4,0.03175987612107469
+12 Approximate Entropy,4,0.0948485671737064
+13 Cumulative Sums #1,4,0.3639675720316879
+13 Cumulative Sums #2,4,0.8958250030956061
+14 Random Excursions #1,4,
+14 Random Excursions #2,4,
+14 Random Excursions #3,4,
+14 Random Excursions #4,4,
+14 Random Excursions #5,4,
+14 Random Excursions #6,4,
+14 Random Excursions #7,4,
+14 Random Excursions #8,4,
+15 Random Excursions Variant #1,4,
+15 Random Excursions Variant #2,4,
+15 Random Excursions Variant #3,4,
+15 Random Excursions Variant #4,4,
+15 Random Excursions Variant #5,4,
+15 Random Excursions Variant #6,4,
+15 Random Excursions Variant #7,4,
+15 Random Excursions Variant #8,4,
+15 Random Excursions Variant #9,4,
+15 Random Excursions Variant #10,4,
+15 Random Excursions Variant #11,4,
+15 Random Excursions Variant #12,4,
+15 Random Excursions Variant #13,4,
+15 Random Excursions Variant #14,4,
+15 Random Excursions Variant #15,4,
+15 Random Excursions Variant #16,4,
+15 Random Excursions Variant #17,4,
+15 Random Excursions Variant #18,4,
+01 Frequency (Monobit),5,1.0
+02 Block Frequency,5,0.5619811078931058
+03 Runs,5,0.04634528783778667
+04 Longest Run of Ones,5,0.9122989635881888
+05 Binary Matrix Rank,5,0.1282983672606049
+06 DFT (Spectral),5,0.7716705035436164
+07 Non-overlapping Template,5,0.9643704225160741
+08 Overlapping Template,5,0.7522304854393452
+09 Maurer's Universal,5,
+10 Linear Complexity,5,0.9354864226196179
+11 Serial #1,5,0.6182790475525136
+11 Serial #2,5,0.6981678039326089
+12 Approximate Entropy,5,0.8913037371525865
+13 Cumulative Sums #1,5,0.9223809538011397
+13 Cumulative Sums #2,5,0.9223809538011397
+14 Random Excursions #1,5,
+14 Random Excursions #2,5,
+14 Random Excursions #3,5,
+14 Random Excursions #4,5,
+14 Random Excursions #5,5,
+14 Random Excursions #6,5,
+14 Random Excursions #7,5,
+14 Random Excursions #8,5,
+15 Random Excursions Variant #1,5,
+15 Random Excursions Variant #2,5,
+15 Random Excursions Variant #3,5,
+15 Random Excursions Variant #4,5,
+15 Random Excursions Variant #5,5,
+15 Random Excursions Variant #6,5,
+15 Random Excursions Variant #7,5,
+15 Random Excursions Variant #8,5,
+15 Random Excursions Variant #9,5,
+15 Random Excursions Variant #10,5,
+15 Random Excursions Variant #11,5,
+15 Random Excursions Variant #12,5,
+15 Random Excursions Variant #13,5,
+15 Random Excursions Variant #14,5,
+15 Random Excursions Variant #15,5,
+15 Random Excursions Variant #16,5,
+15 Random Excursions Variant #17,5,
+15 Random Excursions Variant #18,5,
+01 Frequency (Monobit),6,0.1372075862882082
+02 Block Frequency,6,0.2990366355948855
+03 Runs,6,0.5316535266290303
+04 Longest Run of Ones,6,0.43390493222365
+05 Binary Matrix Rank,6,0.5206282288247329
+06 DFT (Spectral),6,0.4000385146056339
+07 Non-overlapping Template,6,0.6053714784356269
+08 Overlapping Template,6,0.1789106857397596
+09 Maurer's Universal,6,
+10 Linear Complexity,6,0.8442556254287519
+11 Serial #1,6,0.7098625236007957
+11 Serial #2,6,0.6735113836648823
+12 Approximate Entropy,6,0.5002314646760337
+13 Cumulative Sums #1,6,0.1730736240616668
+13 Cumulative Sums #2,6,0.07725567678740575
+14 Random Excursions #1,6,
+14 Random Excursions #2,6,
+14 Random Excursions #3,6,
+14 Random Excursions #4,6,
+14 Random Excursions #5,6,
+14 Random Excursions #6,6,
+14 Random Excursions #7,6,
+14 Random Excursions #8,6,
+15 Random Excursions Variant #1,6,
+15 Random Excursions Variant #2,6,
+15 Random Excursions Variant #3,6,
+15 Random Excursions Variant #4,6,
+15 Random Excursions Variant #5,6,
+15 Random Excursions Variant #6,6,
+15 Random Excursions Variant #7,6,
+15 Random Excursions Variant #8,6,
+15 Random Excursions Variant #9,6,
+15 Random Excursions Variant #10,6,
+15 Random Excursions Variant #11,6,
+15 Random Excursions Variant #12,6,
+15 Random Excursions Variant #13,6,
+15 Random Excursions Variant #14,6,
+15 Random Excursions Variant #15,6,
+15 Random Excursions Variant #16,6,
+15 Random Excursions Variant #17,6,
+15 Random Excursions Variant #18,6,
+01 Frequency (Monobit),7,0.6173286786345022
+02 Block Frequency,7,0.4455929887516451
+03 Runs,7,0.21482549565747636
+04 Longest Run of Ones,7,0.7140559054567922
+05 Binary Matrix Rank,7,0.0003603516388477893
+06 DFT (Spectral),7,0.7716705035436164
+07 Non-overlapping Template,7,0.37543366478268436
+08 Overlapping Template,7,0.45490629183895126
+09 Maurer's Universal,7,
+10 Linear Complexity,7,0.679386736615669
+11 Serial #1,7,0.678441411219421
+11 Serial #2,7,0.5089421603638175
+12 Approximate Entropy,7,0.8348210710125568
+13 Cumulative Sums #1,7,0.7773232943948312
+13 Cumulative Sums #2,7,0.6298815402527876
+14 Random Excursions #1,7,
+14 Random Excursions #2,7,
+14 Random Excursions #3,7,
+14 Random Excursions #4,7,
+14 Random Excursions #5,7,
+14 Random Excursions #6,7,
+14 Random Excursions #7,7,
+14 Random Excursions #8,7,
+15 Random Excursions Variant #1,7,
+15 Random Excursions Variant #2,7,
+15 Random Excursions Variant #3,7,
+15 Random Excursions Variant #4,7,
+15 Random Excursions Variant #5,7,
+15 Random Excursions Variant #6,7,
+15 Random Excursions Variant #7,7,
+15 Random Excursions Variant #8,7,
+15 Random Excursions Variant #9,7,
+15 Random Excursions Variant #10,7,
+15 Random Excursions Variant #11,7,
+15 Random Excursions Variant #12,7,
+15 Random Excursions Variant #13,7,
+15 Random Excursions Variant #14,7,
+15 Random Excursions Variant #15,7,
+15 Random Excursions Variant #16,7,
+15 Random Excursions Variant #17,7,
+15 Random Excursions Variant #18,7,
+01 Frequency (Monobit),8,0.5606615988213097
+02 Block Frequency,8,0.8187941382895852
+03 Runs,8,0.9085140764560148
+04 Longest Run of Ones,8,0.7259425608780654
+05 Binary Matrix Rank,8,0.5796015069884036
+06 DFT (Spectral),8,0.059262856209303286
+07 Non-overlapping Template,8,0.15418681284894106
+08 Overlapping Template,8,0.6052511891879281
+09 Maurer's Universal,8,
+10 Linear Complexity,8,0.0035095056626741916
+11 Serial #1,8,0.9093060245207065
+11 Serial #2,8,0.8857510283190124
+12 Approximate Entropy,8,0.8031440384299513
+13 Cumulative Sums #1,8,0.9323948006396887
+13 Cumulative Sums #2,8,0.5511450273983348
+14 Random Excursions #1,8,0.9878907015673802
+14 Random Excursions #2,8,0.9446481782207484
+14 Random Excursions #3,8,0.691122849608871
+14 Random Excursions #4,8,0.9757342841061416
+14 Random Excursions #5,8,0.6722714447550437
+14 Random Excursions #6,8,0.5269863168177134
+14 Random Excursions #7,8,0.7641077776726635
+14 Random Excursions #8,8,0.4984878342920409
+15 Random Excursions Variant #1,8,0.47326995582714904
+15 Random Excursions Variant #2,8,0.6357544014125838
+15 Random Excursions Variant #3,8,0.6377791945637907
+15 Random Excursions Variant #4,8,0.3726300041576816
+15 Random Excursions Variant #5,8,0.3243028212583056
+15 Random Excursions Variant #6,8,0.5552854470508061
+15 Random Excursions Variant #7,8,0.9122511651503045
+15 Random Excursions Variant #8,8,0.8125702491103388
+15 Random Excursions Variant #9,8,0.5111148097518385
+15 Random Excursions Variant #10,8,0.5469450142606386
+15 Random Excursions Variant #11,8,0.7760012856081271
+15 Random Excursions Variant #12,8,0.7042601582131552
+15 Random Excursions Variant #13,8,0.6789210773845393
+15 Random Excursions Variant #14,8,0.9927182651123502
+15 Random Excursions Variant #15,8,0.894918930605995
+15 Random Excursions Variant #16,8,0.8613516068674019
+15 Random Excursions Variant #17,8,0.5813557619370188
+15 Random Excursions Variant #18,8,0.8524975787162062
+01 Frequency (Monobit),9,0.6671448953336327
+02 Block Frequency,9,0.37103763983277993
+03 Runs,9,0.22244344263832033
+04 Longest Run of Ones,9,0.3785110425418253
+05 Binary Matrix Rank,9,0.8846097331987021
+06 DFT (Spectral),9,0.749567615602637
+07 Non-overlapping Template,9,0.972106583642299
+08 Overlapping Template,9,0.6673651251328814
+09 Maurer's Universal,9,
+10 Linear Complexity,9,0.046834052670340805
+11 Serial #1,9,0.49500746788357786
+11 Serial #2,9,0.5860225094709229
+12 Approximate Entropy,9,0.10385112516127207
+13 Cumulative Sums #1,9,0.7947315184594881
+13 Cumulative Sums #2,9,0.4206046367196499
+14 Random Excursions #1,9,
+14 Random Excursions #2,9,
+14 Random Excursions #3,9,
+14 Random Excursions #4,9,
+14 Random Excursions #5,9,
+14 Random Excursions #6,9,
+14 Random Excursions #7,9,
+14 Random Excursions #8,9,
+15 Random Excursions Variant #1,9,
+15 Random Excursions Variant #2,9,
+15 Random Excursions Variant #3,9,
+15 Random Excursions Variant #4,9,
+15 Random Excursions Variant #5,9,
+15 Random Excursions Variant #6,9,
+15 Random Excursions Variant #7,9,
+15 Random Excursions Variant #8,9,
+15 Random Excursions Variant #9,9,
+15 Random Excursions Variant #10,9,
+15 Random Excursions Variant #11,9,
+15 Random Excursions Variant #12,9,
+15 Random Excursions Variant #13,9,
+15 Random Excursions Variant #14,9,
+15 Random Excursions Variant #15,9,
+15 Random Excursions Variant #16,9,
+15 Random Excursions Variant #17,9,
+15 Random Excursions Variant #18,9,
+01 Frequency (Monobit),10,0.3238237487354915
+02 Block Frequency,10,0.8701318039525757
+03 Runs,10,0.4728016776818769
+04 Longest Run of Ones,10,0.865863069987636
+05 Binary Matrix Rank,10,0.1179104745819847
+06 DFT (Spectral),10,0.41648562941609724
+07 Non-overlapping Template,10,0.14119415963003334
+08 Overlapping Template,10,0.8315980174642117
+09 Maurer's Universal,10,
+10 Linear Complexity,10,0.13333038331243086
+11 Serial #1,10,0.07883227640356333
+11 Serial #2,10,0.07671820828477831
+12 Approximate Entropy,10,0.3462742300025639
+13 Cumulative Sums #1,10,0.4275159143177793
+13 Cumulative Sums #2,10,0.3358712050240964
+14 Random Excursions #1,10,
+14 Random Excursions #2,10,
+14 Random Excursions #3,10,
+14 Random Excursions #4,10,
+14 Random Excursions #5,10,
+14 Random Excursions #6,10,
+14 Random Excursions #7,10,
+14 Random Excursions #8,10,
+15 Random Excursions Variant #1,10,
+15 Random Excursions Variant #2,10,
+15 Random Excursions Variant #3,10,
+15 Random Excursions Variant #4,10,
+15 Random Excursions Variant #5,10,
+15 Random Excursions Variant #6,10,
+15 Random Excursions Variant #7,10,
+15 Random Excursions Variant #8,10,
+15 Random Excursions Variant #9,10,
+15 Random Excursions Variant #10,10,
+15 Random Excursions Variant #11,10,
+15 Random Excursions Variant #12,10,
+15 Random Excursions Variant #13,10,
+15 Random Excursions Variant #14,10,
+15 Random Excursions Variant #15,10,
+15 Random Excursions Variant #16,10,
+15 Random Excursions Variant #17,10,
+15 Random Excursions Variant #18,10,
+01 Frequency (Monobit),11,0.9697296747881002
+02 Block Frequency,11,0.8696097106593854
+03 Runs,11,0.6488412448208206
+04 Longest Run of Ones,11,0.8687575987609139
+05 Binary Matrix Rank,11,0.9735103326127356
+06 DFT (Spectral),11,0.04846191667650119
+07 Non-overlapping Template,11,0.8453668629912331
+08 Overlapping Template,11,0.3174947936134115
+09 Maurer's Universal,11,
+10 Linear Complexity,11,0.6590993054240073
+11 Serial #1,11,0.6655943430062331
+11 Serial #2,11,0.3617779503646357
+12 Approximate Entropy,11,0.2563262070150307
+13 Cumulative Sums #1,11,0.5675881043068558
+13 Cumulative Sums #2,11,0.5349654916161024
+14 Random Excursions #1,11,
+14 Random Excursions #2,11,
+14 Random Excursions #3,11,
+14 Random Excursions #4,11,
+14 Random Excursions #5,11,
+14 Random Excursions #6,11,
+14 Random Excursions #7,11,
+14 Random Excursions #8,11,
+15 Random Excursions Variant #1,11,
+15 Random Excursions Variant #2,11,
+15 Random Excursions Variant #3,11,
+15 Random Excursions Variant #4,11,
+15 Random Excursions Variant #5,11,
+15 Random Excursions Variant #6,11,
+15 Random Excursions Variant #7,11,
+15 Random Excursions Variant #8,11,
+15 Random Excursions Variant #9,11,
+15 Random Excursions Variant #10,11,
+15 Random Excursions Variant #11,11,
+15 Random Excursions Variant #12,11,
+15 Random Excursions Variant #13,11,
+15 Random Excursions Variant #14,11,
+15 Random Excursions Variant #15,11,
+15 Random Excursions Variant #16,11,
+15 Random Excursions Variant #17,11,
+15 Random Excursions Variant #18,11,
+01 Frequency (Monobit),12,0.3827782957971997
+02 Block Frequency,12,0.07234963841722475
+03 Runs,12,0.9766938338560619
+04 Longest Run of Ones,12,0.2259378973927423
+05 Binary Matrix Rank,12,0.6515263120783973
+06 DFT (Spectral),12,1.0
+07 Non-overlapping Template,12,0.14729436539592797
+08 Overlapping Template,12,0.6929599123660068
+09 Maurer's Universal,12,
+10 Linear Complexity,12,0.1899498089546773
+11 Serial #1,12,0.19308787146841153
+11 Serial #2,12,0.2764851795934981
+12 Approximate Entropy,12,0.009901012796084298
+13 Cumulative Sums #1,12,0.7004150043263513
+13 Cumulative Sums #2,12,0.4252035016564395
+14 Random Excursions #1,12,
+14 Random Excursions #2,12,
+14 Random Excursions #3,12,
+14 Random Excursions #4,12,
+14 Random Excursions #5,12,
+14 Random Excursions #6,12,
+14 Random Excursions #7,12,
+14 Random Excursions #8,12,
+15 Random Excursions Variant #1,12,
+15 Random Excursions Variant #2,12,
+15 Random Excursions Variant #3,12,
+15 Random Excursions Variant #4,12,
+15 Random Excursions Variant #5,12,
+15 Random Excursions Variant #6,12,
+15 Random Excursions Variant #7,12,
+15 Random Excursions Variant #8,12,
+15 Random Excursions Variant #9,12,
+15 Random Excursions Variant #10,12,
+15 Random Excursions Variant #11,12,
+15 Random Excursions Variant #12,12,
+15 Random Excursions Variant #13,12,
+15 Random Excursions Variant #14,12,
+15 Random Excursions Variant #15,12,
+15 Random Excursions Variant #16,12,
+15 Random Excursions Variant #17,12,
+15 Random Excursions Variant #18,12,
+01 Frequency (Monobit),13,0.9546081275372709
+02 Block Frequency,13,0.5663660707306353
+03 Runs,13,0.41097333728948876
+04 Longest Run of Ones,13,0.47096438409444574
+05 Binary Matrix Rank,13,0.6697058811725807
+06 DFT (Spectral),13,0.9075921509269966
+07 Non-overlapping Template,13,0.05540940166189092
+08 Overlapping Template,13,0.21548146233643675
+09 Maurer's Universal,13,
+10 Linear Complexity,13,0.008242833133195933
+11 Serial #1,13,0.43533810644114057
+11 Serial #2,13,0.1912134473377504
+12 Approximate Entropy,13,0.5653354821767547
+13 Cumulative Sums #1,13,0.3130983501475617
+13 Cumulative Sums #2,13,0.347709161998464
+14 Random Excursions #1,13,0.22540625579055126
+14 Random Excursions #2,13,0.06571513738979991
+14 Random Excursions #3,13,0.2810734874593088
+14 Random Excursions #4,13,0.17494434776288875
+14 Random Excursions #5,13,0.6646200999100715
+14 Random Excursions #6,13,0.7592320620142476
+14 Random Excursions #7,13,0.19527317312807252
+14 Random Excursions #8,13,0.48521634074980724
+15 Random Excursions Variant #1,13,0.15136167656736402
+15 Random Excursions Variant #2,13,0.07927982871088886
+15 Random Excursions Variant #3,13,0.06061183315755111
+15 Random Excursions Variant #4,13,0.08422336350383985
+15 Random Excursions Variant #5,13,0.10625734802124048
+15 Random Excursions Variant #6,13,0.16408071032624028
+15 Random Excursions Variant #7,13,0.20534286667006887
+15 Random Excursions Variant #8,13,0.35418238704771254
+15 Random Excursions Variant #9,13,0.8012523099003722
+15 Random Excursions Variant #10,13,0.3615006632178313
+15 Random Excursions Variant #11,13,0.4674266528833522
+15 Random Excursions Variant #12,13,0.4993875941240197
+15 Random Excursions Variant #13,13,0.3353816904340122
+15 Random Excursions Variant #14,13,0.13364765333500145
+15 Random Excursions Variant #15,13,0.11748780947776329
+15 Random Excursions Variant #16,13,0.19348755877183707
+15 Random Excursions Variant #17,13,0.16723112678280302
+15 Random Excursions Variant #18,13,0.1719219990316464
+01 Frequency (Monobit),14,0.7279524296106983
+02 Block Frequency,14,0.5782337894384756
+03 Runs,14,0.4784897545567855
+04 Longest Run of Ones,14,0.9213549764344721
+05 Binary Matrix Rank,14,0.941633587433575
+06 DFT (Spectral),14,0.41648562941609724
+07 Non-overlapping Template,14,0.07079748421506081
+08 Overlapping Template,14,0.5863952331894435
+09 Maurer's Universal,14,
+10 Linear Complexity,14,0.05765035092356431
+11 Serial #1,14,0.4691516939533851
+11 Serial #2,14,0.3868892070418379
+12 Approximate Entropy,14,0.2109321934386757
+13 Cumulative Sums #1,14,0.3168109683439506
+13 Cumulative Sums #2,14,0.5731253629621098
+14 Random Excursions #1,14,
+14 Random Excursions #2,14,
+14 Random Excursions #3,14,
+14 Random Excursions #4,14,
+14 Random Excursions #5,14,
+14 Random Excursions #6,14,
+14 Random Excursions #7,14,
+14 Random Excursions #8,14,
+15 Random Excursions Variant #1,14,
+15 Random Excursions Variant #2,14,
+15 Random Excursions Variant #3,14,
+15 Random Excursions Variant #4,14,
+15 Random Excursions Variant #5,14,
+15 Random Excursions Variant #6,14,
+15 Random Excursions Variant #7,14,
+15 Random Excursions Variant #8,14,
+15 Random Excursions Variant #9,14,
+15 Random Excursions Variant #10,14,
+15 Random Excursions Variant #11,14,
+15 Random Excursions Variant #12,14,
+15 Random Excursions Variant #13,14,
+15 Random Excursions Variant #14,14,
+15 Random Excursions Variant #15,14,
+15 Random Excursions Variant #16,14,
+15 Random Excursions Variant #17,14,
+15 Random Excursions Variant #18,14,
+01 Frequency (Monobit),15,0.4182028329526659
+02 Block Frequency,15,0.12331049175078836
+03 Runs,15,0.4415797142110965
+04 Longest Run of Ones,15,0.28040250051120463
+05 Binary Matrix Rank,15,0.8329064488456474
+06 DFT (Spectral),15,0.8164196470538247
+07 Non-overlapping Template,15,0.26446509535454843
+08 Overlapping Template,15,0.5773154158427641
+09 Maurer's Universal,15,
+10 Linear Complexity,15,0.3554314576412586
+11 Serial #1,15,0.2140928313771413
+11 Serial #2,15,0.7139678190132741
+12 Approximate Entropy,15,0.06995198303150213
+13 Cumulative Sums #1,15,0.46814438481722076
+13 Cumulative Sums #2,15,0.43685200249199596
+14 Random Excursions #1,15,
+14 Random Excursions #2,15,
+14 Random Excursions #3,15,
+14 Random Excursions #4,15,
+14 Random Excursions #5,15,
+14 Random Excursions #6,15,
+14 Random Excursions #7,15,
+14 Random Excursions #8,15,
+15 Random Excursions Variant #1,15,
+15 Random Excursions Variant #2,15,
+15 Random Excursions Variant #3,15,
+15 Random Excursions Variant #4,15,
+15 Random Excursions Variant #5,15,
+15 Random Excursions Variant #6,15,
+15 Random Excursions Variant #7,15,
+15 Random Excursions Variant #8,15,
+15 Random Excursions Variant #9,15,
+15 Random Excursions Variant #10,15,
+15 Random Excursions Variant #11,15,
+15 Random Excursions Variant #12,15,
+15 Random Excursions Variant #13,15,
+15 Random Excursions Variant #14,15,
+15 Random Excursions Variant #15,15,
+15 Random Excursions Variant #16,15,
+15 Random Excursions Variant #17,15,
+15 Random Excursions Variant #18,15,
+01 Frequency (Monobit),16,0.5188593754270107
+02 Block Frequency,16,0.9195561398631168
+03 Runs,16,0.8336464337200077
+04 Longest Run of Ones,16,0.9120246201867145
+05 Binary Matrix Rank,16,0.2323320604251458
+06 DFT (Spectral),16,0.11710798330468297
+07 Non-overlapping Template,16,0.31500557763958803
+08 Overlapping Template,16,0.0438853740949838
+09 Maurer's Universal,16,
+10 Linear Complexity,16,0.8706953900951098
+11 Serial #1,16,0.3471804145847791
+11 Serial #2,16,0.3239731893724293
+12 Approximate Entropy,16,0.4613074300000882
+13 Cumulative Sums #1,16,0.8738677999018737
+13 Cumulative Sums #2,16,0.556597408003471
+14 Random Excursions #1,16,
+14 Random Excursions #2,16,
+14 Random Excursions #3,16,
+14 Random Excursions #4,16,
+14 Random Excursions #5,16,
+14 Random Excursions #6,16,
+14 Random Excursions #7,16,
+14 Random Excursions #8,16,
+15 Random Excursions Variant #1,16,
+15 Random Excursions Variant #2,16,
+15 Random Excursions Variant #3,16,
+15 Random Excursions Variant #4,16,
+15 Random Excursions Variant #5,16,
+15 Random Excursions Variant #6,16,
+15 Random Excursions Variant #7,16,
+15 Random Excursions Variant #8,16,
+15 Random Excursions Variant #9,16,
+15 Random Excursions Variant #10,16,
+15 Random Excursions Variant #11,16,
+15 Random Excursions Variant #12,16,
+15 Random Excursions Variant #13,16,
+15 Random Excursions Variant #14,16,
+15 Random Excursions Variant #15,16,
+15 Random Excursions Variant #16,16,
+15 Random Excursions Variant #17,16,
+15 Random Excursions Variant #18,16,
+01 Frequency (Monobit),17,0.88933934869504
+02 Block Frequency,17,0.1793376288434247
+03 Runs,17,0.28510964967432706
+04 Longest Run of Ones,17,0.6816581824183583
+05 Binary Matrix Rank,17,0.5357848668571682
+06 DFT (Spectral),17,0.5813855788250666
+07 Non-overlapping Template,17,0.5171996616881507
+08 Overlapping Template,17,0.4966947331749776
+09 Maurer's Universal,17,
+10 Linear Complexity,17,0.21627683587024266
+11 Serial #1,17,0.6192679098923586
+11 Serial #2,17,0.9058705505493712
+12 Approximate Entropy,17,0.43505897125299625
+13 Cumulative Sums #1,17,0.2727311162528473
+13 Cumulative Sums #2,17,0.20680482883138515
+14 Random Excursions #1,17,
+14 Random Excursions #2,17,
+14 Random Excursions #3,17,
+14 Random Excursions #4,17,
+14 Random Excursions #5,17,
+14 Random Excursions #6,17,
+14 Random Excursions #7,17,
+14 Random Excursions #8,17,
+15 Random Excursions Variant #1,17,
+15 Random Excursions Variant #2,17,
+15 Random Excursions Variant #3,17,
+15 Random Excursions Variant #4,17,
+15 Random Excursions Variant #5,17,
+15 Random Excursions Variant #6,17,
+15 Random Excursions Variant #7,17,
+15 Random Excursions Variant #8,17,
+15 Random Excursions Variant #9,17,
+15 Random Excursions Variant #10,17,
+15 Random Excursions Variant #11,17,
+15 Random Excursions Variant #12,17,
+15 Random Excursions Variant #13,17,
+15 Random Excursions Variant #14,17,
+15 Random Excursions Variant #15,17,
+15 Random Excursions Variant #16,17,
+15 Random Excursions Variant #17,17,
+15 Random Excursions Variant #18,17,
+01 Frequency (Monobit),18,0.16602873582203959
+02 Block Frequency,18,0.2451140728968402
+03 Runs,18,0.2393361193913492
+04 Longest Run of Ones,18,0.9020751793378876
+05 Binary Matrix Rank,18,0.0540283632594818
+06 DFT (Spectral),18,0.6424293854355201
+07 Non-overlapping Template,18,0.9811931184463242
+08 Overlapping Template,18,0.3840181889503235
+09 Maurer's Universal,18,
+10 Linear Complexity,18,0.4276806233435716
+11 Serial #1,18,0.645330236557608
+11 Serial #2,18,0.4360180055707733
+12 Approximate Entropy,18,0.3224196832699185
+13 Cumulative Sums #1,18,0.2596700521653201
+13 Cumulative Sums #2,18,0.3224417775718341
+14 Random Excursions #1,18,
+14 Random Excursions #2,18,
+14 Random Excursions #3,18,
+14 Random Excursions #4,18,
+14 Random Excursions #5,18,
+14 Random Excursions #6,18,
+14 Random Excursions #7,18,
+14 Random Excursions #8,18,
+15 Random Excursions Variant #1,18,
+15 Random Excursions Variant #2,18,
+15 Random Excursions Variant #3,18,
+15 Random Excursions Variant #4,18,
+15 Random Excursions Variant #5,18,
+15 Random Excursions Variant #6,18,
+15 Random Excursions Variant #7,18,
+15 Random Excursions Variant #8,18,
+15 Random Excursions Variant #9,18,
+15 Random Excursions Variant #10,18,
+15 Random Excursions Variant #11,18,
+15 Random Excursions Variant #12,18,
+15 Random Excursions Variant #13,18,
+15 Random Excursions Variant #14,18,
+15 Random Excursions Variant #15,18,
+15 Random Excursions Variant #16,18,
+15 Random Excursions Variant #17,18,
+15 Random Excursions Variant #18,18,
+01 Frequency (Monobit),19,0.7662725214830919
+02 Block Frequency,19,0.7786112795840575
+03 Runs,19,0.36592499275325435
+04 Longest Run of Ones,19,0.44964218515276777
+05 Binary Matrix Rank,19,0.6591959427328808
+06 DFT (Spectral),19,0.8846356685373615
+07 Non-overlapping Template,19,0.37751418734704323
+08 Overlapping Template,19,0.8163591011366973
+09 Maurer's Universal,19,
+10 Linear Complexity,19,0.7598540477472769
+11 Serial #1,19,0.7462424851254252
+11 Serial #2,19,0.6714948515646821
+12 Approximate Entropy,19,0.762640014900085
+13 Cumulative Sums #1,19,0.9139081150831627
+13 Cumulative Sums #2,19,0.6531765945846719
+14 Random Excursions #1,19,
+14 Random Excursions #2,19,
+14 Random Excursions #3,19,
+14 Random Excursions #4,19,
+14 Random Excursions #5,19,
+14 Random Excursions #6,19,
+14 Random Excursions #7,19,
+14 Random Excursions #8,19,
+15 Random Excursions Variant #1,19,
+15 Random Excursions Variant #2,19,
+15 Random Excursions Variant #3,19,
+15 Random Excursions Variant #4,19,
+15 Random Excursions Variant #5,19,
+15 Random Excursions Variant #6,19,
+15 Random Excursions Variant #7,19,
+15 Random Excursions Variant #8,19,
+15 Random Excursions Variant #9,19,
+15 Random Excursions Variant #10,19,
+15 Random Excursions Variant #11,19,
+15 Random Excursions Variant #12,19,
+15 Random Excursions Variant #13,19,
+15 Random Excursions Variant #14,19,
+15 Random Excursions Variant #15,19,
+15 Random Excursions Variant #16,19,
+15 Random Excursions Variant #17,19,
+15 Random Excursions Variant #18,19,
+01 Frequency (Monobit),20,0.8943391678289574
+02 Block Frequency,20,0.876791374629186
+03 Runs,20,0.349284221535935
+04 Longest Run of Ones,20,0.7881208388910124
+05 Binary Matrix Rank,20,0.46189328373791655
+06 DFT (Spectral),20,0.6633550269772723
+07 Non-overlapping Template,20,0.017658566360897503
+08 Overlapping Template,20,0.10399168094338206
+09 Maurer's Universal,20,
+10 Linear Complexity,20,0.02041175851791516
+11 Serial #1,20,0.963743357314321
+11 Serial #2,20,0.8029015749563264
+12 Approximate Entropy,20,0.8978443011938185
+13 Cumulative Sums #1,20,0.8862618908283599
+13 Cumulative Sums #2,20,0.9667067236923366
+14 Random Excursions #1,20,
+14 Random Excursions #2,20,
+14 Random Excursions #3,20,
+14 Random Excursions #4,20,
+14 Random Excursions #5,20,
+14 Random Excursions #6,20,
+14 Random Excursions #7,20,
+14 Random Excursions #8,20,
+15 Random Excursions Variant #1,20,
+15 Random Excursions Variant #2,20,
+15 Random Excursions Variant #3,20,
+15 Random Excursions Variant #4,20,
+15 Random Excursions Variant #5,20,
+15 Random Excursions Variant #6,20,
+15 Random Excursions Variant #7,20,
+15 Random Excursions Variant #8,20,
+15 Random Excursions Variant #9,20,
+15 Random Excursions Variant #10,20,
+15 Random Excursions Variant #11,20,
+15 Random Excursions Variant #12,20,
+15 Random Excursions Variant #13,20,
+15 Random Excursions Variant #14,20,
+15 Random Excursions Variant #15,20,
+15 Random Excursions Variant #16,20,
+15 Random Excursions Variant #17,20,
+15 Random Excursions Variant #18,20,
+01 Frequency (Monobit),21,0.22222266617312492
+02 Block Frequency,21,0.5682433808825716
+03 Runs,21,0.011883076686751875
+04 Longest Run of Ones,21,0.3833148828547348
+05 Binary Matrix Rank,21,0.31892352177133676
+06 DFT (Spectral),21,0.0719900380831076
+07 Non-overlapping Template,21,0.9028009931670076
+08 Overlapping Template,21,0.008425912675191214
+09 Maurer's Universal,21,
+10 Linear Complexity,21,0.7833619627541196
+11 Serial #1,21,0.35161328713631335
+11 Serial #2,21,0.6859304785258801
+12 Approximate Entropy,21,0.03338302757641043
+13 Cumulative Sums #1,21,0.26127569086848834
+13 Cumulative Sums #2,21,0.378642367472295
+14 Random Excursions #1,21,
+14 Random Excursions #2,21,
+14 Random Excursions #3,21,
+14 Random Excursions #4,21,
+14 Random Excursions #5,21,
+14 Random Excursions #6,21,
+14 Random Excursions #7,21,
+14 Random Excursions #8,21,
+15 Random Excursions Variant #1,21,
+15 Random Excursions Variant #2,21,
+15 Random Excursions Variant #3,21,
+15 Random Excursions Variant #4,21,
+15 Random Excursions Variant #5,21,
+15 Random Excursions Variant #6,21,
+15 Random Excursions Variant #7,21,
+15 Random Excursions Variant #8,21,
+15 Random Excursions Variant #9,21,
+15 Random Excursions Variant #10,21,
+15 Random Excursions Variant #11,21,
+15 Random Excursions Variant #12,21,
+15 Random Excursions Variant #13,21,
+15 Random Excursions Variant #14,21,
+15 Random Excursions Variant #15,21,
+15 Random Excursions Variant #16,21,
+15 Random Excursions Variant #17,21,
+15 Random Excursions Variant #18,21,
+01 Frequency (Monobit),22,0.21511862812929097
+02 Block Frequency,22,0.10212865677517945
+03 Runs,22,0.733806870830864
+04 Longest Run of Ones,22,0.5199195997341739
+05 Binary Matrix Rank,22,0.6967569168143009
+06 DFT (Spectral),22,0.976849397285314
+07 Non-overlapping Template,22,0.14312797386678236
+08 Overlapping Template,22,0.8891248718545006
+09 Maurer's Universal,22,
+10 Linear Complexity,22,0.4730369534137605
+11 Serial #1,22,0.7780656398647239
+11 Serial #2,22,0.9578333130263619
+12 Approximate Entropy,22,0.5230352276857232
+13 Cumulative Sums #1,22,0.34372944303687114
+13 Cumulative Sums #2,22,0.4252035016564395
+14 Random Excursions #1,22,
+14 Random Excursions #2,22,
+14 Random Excursions #3,22,
+14 Random Excursions #4,22,
+14 Random Excursions #5,22,
+14 Random Excursions #6,22,
+14 Random Excursions #7,22,
+14 Random Excursions #8,22,
+15 Random Excursions Variant #1,22,
+15 Random Excursions Variant #2,22,
+15 Random Excursions Variant #3,22,
+15 Random Excursions Variant #4,22,
+15 Random Excursions Variant #5,22,
+15 Random Excursions Variant #6,22,
+15 Random Excursions Variant #7,22,
+15 Random Excursions Variant #8,22,
+15 Random Excursions Variant #9,22,
+15 Random Excursions Variant #10,22,
+15 Random Excursions Variant #11,22,
+15 Random Excursions Variant #12,22,
+15 Random Excursions Variant #13,22,
+15 Random Excursions Variant #14,22,
+15 Random Excursions Variant #15,22,
+15 Random Excursions Variant #16,22,
+15 Random Excursions Variant #17,22,
+15 Random Excursions Variant #18,22,
+01 Frequency (Monobit),23,0.0014987431894513622
+02 Block Frequency,23,0.2451140728968402
+03 Runs,23,0.455289182224159
+04 Longest Run of Ones,23,0.17754750424603827
+05 Binary Matrix Rank,23,0.9999258727997247
+06 DFT (Spectral),23,0.5813855788250666
+07 Non-overlapping Template,23,0.0006777233449553745
+08 Overlapping Template,23,0.44298777970634573
+09 Maurer's Universal,23,
+10 Linear Complexity,23,0.32643165422926657
+11 Serial #1,23,0.29009822732314783
+11 Serial #2,23,0.17496675316017088
+12 Approximate Entropy,23,0.17927016756796532
+13 Cumulative Sums #1,23,0.0025427773176293984
+13 Cumulative Sums #2,23,0.0013661379023495554
+14 Random Excursions #1,23,
+14 Random Excursions #2,23,
+14 Random Excursions #3,23,
+14 Random Excursions #4,23,
+14 Random Excursions #5,23,
+14 Random Excursions #6,23,
+14 Random Excursions #7,23,
+14 Random Excursions #8,23,
+15 Random Excursions Variant #1,23,
+15 Random Excursions Variant #2,23,
+15 Random Excursions Variant #3,23,
+15 Random Excursions Variant #4,23,
+15 Random Excursions Variant #5,23,
+15 Random Excursions Variant #6,23,
+15 Random Excursions Variant #7,23,
+15 Random Excursions Variant #8,23,
+15 Random Excursions Variant #9,23,
+15 Random Excursions Variant #10,23,
+15 Random Excursions Variant #11,23,
+15 Random Excursions Variant #12,23,
+15 Random Excursions Variant #13,23,
+15 Random Excursions Variant #14,23,
+15 Random Excursions Variant #15,23,
+15 Random Excursions Variant #16,23,
+15 Random Excursions Variant #17,23,
+15 Random Excursions Variant #18,23,
+01 Frequency (Monobit),24,0.43661599744396407
+02 Block Frequency,24,0.5327267399518519
+03 Runs,24,0.13604279959245805
+04 Longest Run of Ones,24,0.13246871633130072
+05 Binary Matrix Rank,24,0.948501971436096
+06 DFT (Spectral),24,0.23413245951303407
+07 Non-overlapping Template,24,0.6202930960477475
+08 Overlapping Template,24,0.41463967342307634
+09 Maurer's Universal,24,
+10 Linear Complexity,24,0.3081060780227285
+11 Serial #1,24,0.6971781286145938
+11 Serial #2,24,0.7510828493035723
+12 Approximate Entropy,24,0.5082717789150786
+13 Cumulative Sums #1,24,0.7538231412696805
+13 Cumulative Sums #2,24,0.3003620945563461
+14 Random Excursions #1,24,
+14 Random Excursions #2,24,
+14 Random Excursions #3,24,
+14 Random Excursions #4,24,
+14 Random Excursions #5,24,
+14 Random Excursions #6,24,
+14 Random Excursions #7,24,
+14 Random Excursions #8,24,
+15 Random Excursions Variant #1,24,
+15 Random Excursions Variant #2,24,
+15 Random Excursions Variant #3,24,
+15 Random Excursions Variant #4,24,
+15 Random Excursions Variant #5,24,
+15 Random Excursions Variant #6,24,
+15 Random Excursions Variant #7,24,
+15 Random Excursions Variant #8,24,
+15 Random Excursions Variant #9,24,
+15 Random Excursions Variant #10,24,
+15 Random Excursions Variant #11,24,
+15 Random Excursions Variant #12,24,
+15 Random Excursions Variant #13,24,
+15 Random Excursions Variant #14,24,
+15 Random Excursions Variant #15,24,
+15 Random Excursions Variant #16,24,
+15 Random Excursions Variant #17,24,
+15 Random Excursions Variant #18,24,
+01 Frequency (Monobit),25,0.34925558589695155
+02 Block Frequency,25,0.6920152744474113
+03 Runs,25,0.8368366322920064
+04 Longest Run of Ones,25,0.054213734148272456
+05 Binary Matrix Rank,25,0.15474328504961415
+06 DFT (Spectral),25,0.13888083923540914
+07 Non-overlapping Template,25,0.2524322547463352
+08 Overlapping Template,25,0.4097031885322194
+09 Maurer's Universal,25,
+10 Linear Complexity,25,0.025280689981914864
+11 Serial #1,25,0.6334056090012463
+11 Serial #2,25,0.1735872551504883
+12 Approximate Entropy,25,0.9167507165403818
+13 Cumulative Sums #1,25,0.6269902519394512
+13 Cumulative Sums #2,25,0.24864376207062186
+14 Random Excursions #1,25,0.8500029676273306
+14 Random Excursions #2,25,0.07119017793764407
+14 Random Excursions #3,25,0.47582373635060426
+14 Random Excursions #4,25,0.23309970334017824
+14 Random Excursions #5,25,0.29911831455162485
+14 Random Excursions #6,25,0.09497766791410309
+14 Random Excursions #7,25,0.439578373763413
+14 Random Excursions #8,25,0.31106277161413415
+15 Random Excursions Variant #1,25,0.6873828807600686
+15 Random Excursions Variant #2,25,0.8477107281898827
+15 Random Excursions Variant #3,25,0.9367621149136759
+15 Random Excursions Variant #4,25,0.8360065266604293
+15 Random Excursions Variant #5,25,0.8189840833392742
+15 Random Excursions Variant #6,25,0.9310706569968428
+15 Random Excursions Variant #7,25,0.7490970897183191
+15 Random Excursions Variant #8,25,0.519496090710238
+15 Random Excursions Variant #9,25,0.954375557058182
+15 Random Excursions Variant #10,25,0.34516260313805963
+15 Random Excursions Variant #11,25,0.25445252615345604
+15 Random Excursions Variant #12,25,0.15190383080364211
+15 Random Excursions Variant #13,25,0.18354970535134918
+15 Random Excursions Variant #14,25,0.4231424168616537
+15 Random Excursions Variant #15,25,0.610832492642241
+15 Random Excursions Variant #16,25,0.6060565339894921
+15 Random Excursions Variant #17,25,0.5897559322240328
+15 Random Excursions Variant #18,25,0.5836169794080428
