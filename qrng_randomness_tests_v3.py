@@ -1047,6 +1047,36 @@ class Installer:
         self.refresh_config_scripts(d)
         return build() or self.fail("testu01")
 
+    def jsoncpp_static(self, cxx) -> bool:
+        """Build jsoncpp 1.9.6 as a STATIC library with the same compiler as the NIST tool.
+        Homebrew's jsoncpp is built with Apple clang/libc++, which cannot be linked from
+        GCC's libstdc++ (undefined Json::... symbols). ~/.local/include and ~/.local/lib are
+        searched first (CPATH / LIBRARY_PATH), so the NIST Makefile picks this copy up."""
+        lib = self.prefix / "lib" / "libjsoncpp.a"
+        hdr = self.prefix / "include" / "json" / "json.h"
+        if lib.exists() and hdr.exists():
+            return True
+        print("  building jsoncpp (static) with the same compiler as the NIST tool ...")
+        if not self.sys_pkgs("jsoncpp", ["cmake"], ["cmake"]):
+            return False
+        d = self.src / "jsoncpp"
+        if not (d / ".git").exists():
+            if d.exists():
+                shutil.rmtree(d)
+            if not self.run(["git", "clone", "--depth", "1", "--branch", "1.9.6",
+                             "https://github.com/open-source-parsers/jsoncpp.git", str(d)], "jsoncpp"):
+                return False
+        cfg = ["cmake", "-S", ".", "-B", "build", "-DCMAKE_BUILD_TYPE=Release",
+               "-DBUILD_SHARED_LIBS=OFF", "-DBUILD_STATIC_LIBS=ON", "-DBUILD_OBJECT_LIBS=OFF",
+               "-DJSONCPP_WITH_TESTS=OFF", "-DJSONCPP_WITH_POST_BUILD_UNITTEST=OFF",
+               "-DJSONCPP_WITH_PKGCONFIG_SUPPORT=OFF", "-DJSONCPP_WITH_CMAKE_PACKAGE=OFF",
+               "-DCMAKE_POSITION_INDEPENDENT_CODE=ON", "-DCMAKE_INSTALL_LIBDIR=lib",
+               f"-DCMAKE_CXX_COMPILER={cxx}", f"-DCMAKE_INSTALL_PREFIX={self.prefix}"]
+        ok = (self.run(cfg, "jsoncpp", cwd=d)
+              and self.run(["cmake", "--build", "build", "-j4"], "jsoncpp", cwd=d)
+              and self.run(["cmake", "--install", "build"], "jsoncpp", cwd=d))
+        return (ok and lib.exists()) or self.fail("jsoncpp")
+
     def sp80090b(self) -> bool:
         import re
         if shutil.which("ea_non_iid"):
@@ -1083,13 +1113,18 @@ class Installer:
                 t2 = re.sub(r"(?<![\w-])g\+\+(?![\w+-])", cxx, t2)
             if t2 != t:
                 mk.write_text(t2)
+        if IS_MAC and cxx and not self.jsoncpp_static(cxx):
+            return self.fail("sp80090b", "could not build jsoncpp for GCC")
+        for old in cpp.glob("ea_*"):
+            old.unlink()
         cmd = ["make", "-j4", "iid", "non_iid", "restart"]
         if cxx:
             cmd.append(f"CXX={cxx}")
         if not self.run(cmd, "sp80090b", cwd=cpp):
             return self.fail("sp80090b",
                              "Paste the log tail above if you want help; the NIST "
-                             "Makefile is only tested by NIST on GCC/Linux.")
+                             "Makefile is only tested by NIST on GCC/Linux. Fallback: run the "
+                             "tools in an Ubuntu Docker container (see the script notes).")
         n = self.install_bins(sorted(cpp.glob("ea_*")))
         return n > 0 or self.fail("sp80090b", "build produced no ea_* binaries")
 
