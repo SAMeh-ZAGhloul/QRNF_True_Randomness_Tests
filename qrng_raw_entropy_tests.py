@@ -250,15 +250,23 @@ def parse_restart(text):
     return out
 
 
+_REASON = {}
+
+
 def stage_90b(sym, sb, outdir, args):
     exe_n, exe_i, exe_r = (shutil.which(x) for x in ("ea_non_iid", "ea_iid", "ea_restart"))
     print(f"\n=== 2. NIST SP 800-90B entropy assessment ({sb}-bit samples) ===")
     if not exe_n:
-        print("[error] ea_non_iid not found. Install: python3 qrng_randomness_tests_v3.py --setup sp80090b")
+        print("[error] ea_non_iid not found on PATH. Install: python3 qrng_randomness_tests_v3.py --setup sp80090b")
+        _REASON["90b"] = "tool not found: ea_non_iid is not on PATH (run --setup sp80090b)"
         return None
     n = len(sym)
     if n < 1_000_000:
-        print(f"[skip] {n:,} samples; SP 800-90B needs at least 1,000,000 (collect more raw data).")
+        print(f"[skip] only {n:,} samples of {sb} bit(s) ({n * sb / 8 / 1e6:.2f} MB). SP 800-90B needs at least "
+              f"1,000,000 consecutive samples. If your file holds {sb}-bit samples packed back-to-back, "
+              f"check --sample-bits / --packed.")
+        _REASON["90b"] = (f"only {n:,} samples; SP 800-90B requires at least 1,000,000 "
+                          f"(check --sample-bits / --packed if the layout is wrong)")
         return None
     csz = args.samples_per_chunk
     chunks = max(1, min(args.chunks, n // csz))
@@ -1013,7 +1021,7 @@ def main():
             summary["sp800_90b"] = r
             st["sp800_90b"] = "ran"
         else:
-            st["sp800_90b"] = "skipped (fewer than 1,000,000 samples, or tools not installed)"
+            st["sp800_90b"] = "skipped (" + _REASON.get("90b", "unknown reason") + ")"
     else:
         st["sp800_90b"] = "skipped (--skip-90b)"
 
