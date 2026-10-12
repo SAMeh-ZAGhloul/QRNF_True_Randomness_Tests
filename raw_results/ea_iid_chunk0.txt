@@ -1,0 +1,8 @@
+Calculating baseline statistics...
+H_original: 0.991795
+** Passed chi square tests
+
+** Passed length of longest repeated substring test
+
+** Passed IID permutation tests
+

@@ -185,7 +185,8 @@ def diagnostics(sym, sb, max_n):
             "bz2": len(bz2.compress(packed)) / len(packed),
             "lzma": len(lzma.compress(packed)) / len(packed)}
     return {
-        "n": n, "k": k, "shannon": shannon, "shannon_eff": shannon / sb,
+        "n": n, "k": k, "ones": int(counts[1]) if sb == 1 else None,
+        "shannon": shannon, "shannon_eff": shannon / sb,
         "pmax": pmax, "mcv_min_entropy": mcv, "mcv_per_bit": mcv / sb,
         "chi2": chi2, "chi2_p": chi_p, "lags": lags,
         "longest_run": longest, "expected_longest_run": exp_longest,
@@ -253,6 +254,39 @@ def parse_restart(text):
 _REASON = {}
 
 
+def calibrate(sb, csz, trials, outdir):
+    """Run ea_non_iid on freshly generated ideal-random datasets of the same shape (baseline)."""
+    exe = shutil.which("ea_non_iid")
+    if not exe:
+        print("[error] ea_non_iid not found; cannot calibrate")
+        return None
+    rng = np.random.default_rng(int.from_bytes(os.urandom(8), "big"))
+    cdir = outdir / "calibration"
+    cdir.mkdir(parents=True, exist_ok=True)
+    vals, lim = [], {}
+    print(f"\n  calibration: {trials} ideal-random datasets of {csz:,} x {sb}-bit samples ...")
+    for i in range(trials):
+        data = rng.integers(0, 1 << sb, size=csz, dtype=np.uint8)
+        fname = f"cal{i}.bin"
+        data.tofile(cdir / fname)
+        _, txt = run_cmd([exe, "-v", fname, str(sb)], cdir / f"cal{i}.txt", cwd=cdir)
+        pr = parse_90b(txt)
+        (cdir / fname).unlink()
+        h = pr.get("final")
+        if h is None:
+            continue
+        vals.append(h)
+        if pr.get("estimators"):
+            nm = min(pr["estimators"], key=lambda t: t[1])[0]
+            lim[nm] = lim.get(nm, 0) + 1
+        print(f"    {i + 1}/{trials}: {h:.4f}", end="\r")
+    print()
+    if vals:
+        print(f"  baseline (ideal random): min {min(vals):.4f}  median {sorted(vals)[len(vals) // 2]:.4f}  "
+              f"max {max(vals):.4f}")
+    return {"trials": len(vals), "values": vals, "limiting": lim, "sample_bits": sb, "samples": csz}
+
+
 def stage_90b(sym, sb, outdir, args):
     exe_n, exe_i, exe_r = (shutil.which(x) for x in ("ea_non_iid", "ea_iid", "ea_restart"))
     print(f"\n=== 2. NIST SP 800-90B entropy assessment ({sb}-bit samples) ===")
@@ -295,22 +329,34 @@ def stage_90b(sym, sb, outdir, args):
     iid_ok = bool(res["iid"]) and all(p.get("iid_ok") for p in res["iid"])
     res["iid_verified"] = iid_ok
     res["H_iid"] = min((p.get("final", float("nan")) for p in res["iid"]), default=None)
-    h_est = res["H_iid"] if iid_ok else h_non
-    res["track"] = "IID" if iid_ok else "non-IID"
+    use_iid = args.track in ("auto", "iid") and iid_ok
+    if args.track == "iid" and not iid_ok:
+        print("  [warn] --track iid requested but the IID checks did not all pass (or ea_iid was not run): "
+              "the IID claim is rejected, using the non-IID track")
+    h_est = res["H_iid"] if use_iid else h_non
+    res["track"] = "IID" if use_iid else "non-IID"
+    res["track_requested"] = args.track
     h_i = min(h_est, args.claimed_h) if args.claimed_h is not None else h_est
     res["H_I"] = h_i
+
+    if args.calibrate > 0:
+        res["calibration"] = calibrate(sb, csz, args.calibrate, outdir)
 
     if args.restart_file:
         if not exe_r:
             print("[error] ea_restart not found")
         else:
-            rsym = load_samples(args.restart_file, sb, args.packed)
+            try:
+                rsym = load_samples(args.restart_file, sb, args.packed)
+            except OSError as e:
+                print(f"[error] cannot read the restart file: {e}")
+                rsym = np.zeros(0, dtype=np.uint8)
             if len(rsym) < 1_000_000:
                 print(f"[error] restart file has {len(rsym):,} samples; need 1,000,000 "
                       f"(1000 restarts x 1000 samples, one restart per row)")
             else:
                 rsym[:1_000_000].tofile(outdir / "restart_samples.bin")
-                flag = "-i" if iid_ok else "-n"
+                flag = "-i" if use_iid else "-n"
                 print(f"  ea_restart {flag} (H_I = {h_i:.4f}) ...")
                 _, txt = run_cmd([exe_r, flag, "restart_samples.bin", str(sb), f"{h_i:.6f}"],
                                  outdir / "ea_restart.txt", cwd=outdir)
@@ -421,6 +467,10 @@ def stage_nist(sym, sb, outdir, args, v3):
 #    Built from raw_summary.json + the per-tool report files in the output folder,
 #    so it can be regenerated later with:  --report-only <outdir>
 # ----------------------------------------------------------------------------
+def _seq(m):
+    return "1 sequence" if m == 1 else f"{m} sequences"
+
+
 def _fx(x, nd=4):
     return "n/a" if x is None or (isinstance(x, float) and math.isnan(x)) else f"{x:.{nd}f}"
 
@@ -503,7 +553,7 @@ def nist_analysis(outdir, nist):
     phat = 1 - alpha
     lo = phat - 3 * math.sqrt(phat * alpha / m)
     min_pass = math.ceil(lo * m - 1e-9)
-    lines = [f"With {m} sequences at alpha = {alpha}, the acceptable pass proportion is "
+    lines = [f"With {_seq(m)} at alpha = {alpha}, the acceptable pass proportion is "
              f"**{lo:.4f} to 1.0**, so at least **{min_pass} of {m}** sequences must pass each test."]
     lowest = pv.groupby("test")["p"].min()
     rows, rex = [], {"14": [], "15": []}
@@ -537,7 +587,7 @@ def nist_analysis(outdir, nist):
     T = len(full)
     flagged = [r["test"] for _, r in full.iterrows() if r["verdict"] == "FAIL"]
     notes = []
-    if flagged:
+    if flagged and m >= 5:
         lines.append("")
         lines.append("**Tests flagged on the pass-proportion rule:**")
         lines.append("")
@@ -562,10 +612,26 @@ def nist_analysis(outdir, nist):
     # overall tail count
     N = len(pv)
     L = int((pv.p < alpha).sum())
-    if N:
+    if N and m >= 5:
         tail = float(1 - stats.binom.cdf(L - 1, N, alpha)) if L else 1.0
         lines += ["", f"**Overall:** {L} of {N} valid p-values are below {alpha} "
                       f"(expected about {N * alpha:.1f}; naive binomial tail probability {tail:.3g})."]
+    if m < 5 and T:
+        lines += ["", f"With only {_seq(m)}, the pass-proportion rule reduces to \"did the p-value reach alpha\"; "
+                      f"read the individual p-values instead."]
+        names = list(full["test"])
+        grp = [t for t in names if t.startswith(("01 Frequency", "13 Cumulative Sums"))]
+        t_eff = len(names) - len(grp) + (1 if grp else 0)
+        fp_ = pv[pv.test.isin(names)]
+        if len(fp_):
+            i = fp_.p.idxmin()
+            pmin, tname = float(fp_.loc[i, "p"]), fp_.loc[i, "test"]
+            adj = 1 - (1 - pmin) ** t_eff
+            lines.append(f"Smallest p-value: **{pmin:.4g}** ({tname}). Counting Monobit and Cumulative Sums as one "
+                         f"row (they measure the same imbalance), there are {t_eff} effectively independent rows; the "
+                         f"probability that the smallest of {t_eff} p-values is this small or smaller by chance "
+                         f"(Sidak) is about **{adj:.1%}**.")
+            notes_sidak = adj
     core = pv[pv.test.isin(full["test"])]
     if len(core) >= 20:
         ks = stats.kstest(core.p, "uniform")
@@ -584,7 +650,7 @@ def nist_analysis(outdir, nist):
             lines.append("Monobit and Cumulative Sums all measure ones/zeros imbalance, so they are strongly "
                          "correlated: treat those as one event, not several.")
     if m < 55:
-        notes.append(f"only {m} sequences (NIST recommends about {int(1 / alpha)} at alpha = {alpha}); "
+        notes.append(f"only {_seq(m)} (NIST recommends about {int(1 / alpha)} at alpha = {alpha}); "
                      f"the pass-proportion results are noisy")
     return rows, lines, flagged, notes, low
 
@@ -638,6 +704,11 @@ def build_report(outdir: Path):
                           f"Shannon {d['shannon']:.3f} / {sb} bits; MCV min-entropy {d['mcv_min_entropy']:.3f} / {sb} bits"])
         if flags:
             findings.append("Basic diagnostics flag: " + ", ".join(flags) + ".")
+        if d["chi2_p"] < 0.01:
+            extra = (f" ({d['ones'] / d['n']:.4%} ones)" if d.get("ones") is not None else "")
+            findings.append(f"The symbol distribution is not uniform (chi-square p = {d['chi2_p']:.3g}){extra}: "
+                            f"a small bias that costs min-entropy (most-common-value bound "
+                            f"{d['mcv_min_entropy']:.4f} of {sb} bits).")
     if r:
         track = r["track"]
         restart = r.get("restart")
@@ -652,7 +723,7 @@ def build_report(outdir: Path):
             findings.append("**The restart sanity check FAILED**: the source does not restart independently "
                             "or H_I is overstated, so no valid entropy claim exists.")
         if cfg.get("claimed_h") is not None:
-            h_est = r["H_iid"] if r["iid_verified"] else r["H_non_iid"]
+            h_est = r["H_iid"] if r["track"] == "IID" else r["H_non_iid"]
             ok = h_est >= cfg["claimed_h"]
             findings.append(f"Claimed {cfg['claimed_h']} bits/sample is **{'supported' if ok else 'NOT supported'}** "
                             f"by the estimators (estimate {h_est:.4f}).")
@@ -672,10 +743,10 @@ def build_report(outdir: Path):
         _np_, _nf_ = sum(v == "PASS" for v in _v), sum(v == "FAIL" for v in _v)
         summ_rows.append(["NIST SP 800-22", f"{_np_} PASS, {_nf_} FAIL, {len(_v) - _np_ - _nf_} N/A (of {len(_v)} test rows)"
                           + (f"; flagged: {', '.join(flagged)}" if flagged else ""),
-                          f"{m} sequences x {nist['seq_len']:,} bits ({adequacy} sample)"])
+                          f"{_seq(m)} x {nist['seq_len']:,} bits ({adequacy} sample)"])
         if flagged:
             findings.append("SP 800-22 flags (pass-proportion rule): " + ", ".join(flagged) +
-                            ". See section 6 for how likely that is by chance.")
+                            ". See section 5 for how likely that is by chance.")
         limits += [f"NIST SP 800-22: {x}" for x in notes]
         if m < 100:
             recs.append(f"Provide at least {int(1 / nist['alpha'])} sequences x 1 Mbit "
@@ -701,7 +772,7 @@ def build_report(outdir: Path):
         summ_rows.append(["PractRand", f"{len(bad)} failure/suspicious, {len(unusual)} unusual",
                           f"evaluated up to 2^{top} bytes" if top is not None else "no checkpoints"])
         if bad:
-            findings.append(f"PractRand reported {len(bad)} suspicious/failing result(s); see section 8.")
+            findings.append(f"PractRand reported {len(bad)} suspicious/failing result(s); see section 7.")
         if top is not None and top < 30:
             limits.append(f"PractRand only reached 2^{top} bytes (its power grows with length; "
                           f"weak sources typically fail at MB to GB scales)")
@@ -751,6 +822,9 @@ def build_report(outdir: Path):
             ["Shannon entropy / sample", f"{d['shannon']:.4f} of {sb} bits ({d['shannon_eff']:.4f} per bit)"],
             ["MCV min-entropy / sample (99% bound)", f"{d['mcv_min_entropy']:.4f} of {sb} bits ({d['mcv_per_bit']:.4f} per bit)"],
             ["Most common value frequency", f"{d['pmax']:.6f} (uniform = {1 / d['k']:.6f})"],
+            *([["Ones / zeros", f"{d['ones']:,} / {d['n'] - d['ones']:,} ({d['ones'] / d['n']:.4%} ones), "
+                                f"z = {(d['ones'] - d['n'] / 2) / math.sqrt(d['n'] / 4):+.2f}"]]
+              if d.get("ones") is not None else []),
             ["Chi-square uniformity", f"chi2 = {d['chi2']:.1f}, p = {_fp(d['chi2_p'])}"],
             ["Longest identical-symbol run", f"{d['longest_run']} (uniform-source expectation about {d['expected_longest_run']:.1f})"],
             ["Stationarity (10 slices, chi-square homogeneity)", _fp(d.get("homogeneity_p")) +
@@ -790,13 +864,39 @@ def build_report(outdir: Path):
                 erows.append([nme] + [_fx(v) for v in vals] + [_fx(min(vv)) if vv else "n/a"])
             md += ["**Non-IID estimators (bits per sample)**", "", md_table(
                 ["Estimator"] + [f"Chunk {i + 1}" for i in range(len(r["non_iid"]))] + ["Min"], erows), ""]
+        if r["non_iid"] and r["non_iid"][0].get("estimators"):
+            lim = min(r["non_iid"][0]["estimators"], key=lambda t: t[1])
+            rest = sorted(v for nme, v in r["non_iid"][0]["estimators"] if nme != lim[0])
+            md += [f"**Limiting estimator (chunk 1):** {lim[0]} = {lim[1]:.4f}; "
+                   f"all other estimators are between {rest[0]:.4f} and {rest[-1]:.4f}.", ""] if rest else []
+        cal = r.get("calibration")
+        if cal and cal.get("values"):
+            vals = sorted(cal["values"])
+            mine = min(p_.get("final", float("nan")) for p_ in r["non_iid"])
+            below = sum(v < mine for v in vals)
+            lim_txt = ", ".join(f"{k} ({v})" for k, v in sorted(cal["limiting"].items(), key=lambda t: -t[1]))
+            md += ["**Calibration against ideal random data**", "",
+                   f"The same estimator was run on {len(vals)} freshly generated ideal random datasets of the same "
+                   f"size ({cal['samples']:,} samples of {cal['sample_bits']} bit(s)). Non-IID estimates of ideal data "
+                   f"are well below the symbol size because the estimators are conservative at this sample size.", "",
+                   md_table(["Baseline (ideal random)", "Value"], [
+                       ["Minimum", _fx(vals[0])], ["Median", _fx(vals[len(vals) // 2])], ["Maximum", _fx(vals[-1])],
+                       ["Limiting estimator (trials)", lim_txt], ["Your non-IID value", f"**{mine:.4f}**"],
+                       ["Baseline runs below your value", f"{below} of {len(vals)}"]]), ""]
+            if below == 0 and len(vals) >= 20:
+                md += ["**Your value is lower than every ideal-random baseline run**: evidence the source has less "
+                       "min-entropy than an ideal source (or structure the estimators detect).", ""]
+            else:
+                md += ["Your value lies within the range ideal random data produces, so the gap to the symbol size "
+                       "is explained by estimator conservatism, not by detected structure. Note this baseline "
+                       "reflects ideal data; a biased source is expected to sit slightly lower.", ""]
         if r["iid"] and r["iid"][0].get("iid_checks"):
             md += ["**IID checks (chunk 1)**", "", md_table(["Check", "Result"],
                    [[w, v] for v, w in r["iid"][0]["iid_checks"]]), ""]
         md += ["**Result**", "", md_table(["Item", "Value"], [
             ["H (non-IID), minimum over chunks", f"{r['H_non_iid']:.4f} bits/sample"],
             ["H (IID)", "not run" if r["H_iid"] is None else f"{r['H_iid']:.4f} bits/sample (IID verified: {r['iid_verified']})"],
-            ["Track used", r["track"]],
+            ["Track used", r["track"] + (" (default: no IID claim needed)" if r.get("track_requested", "non-iid") == "non-iid" else "")],
             ["H_I after claim", f"{r['H_I']:.4f} bits/sample"],
             ["Final assessed min-entropy", f"**{r['H_final']:.4f} bits/sample** ({r['H_final'] / sb:.4f} per bit)"],
         ]), ""]
@@ -810,9 +910,12 @@ def build_report(outdir: Path):
             ]), ""]
         _cap = ([f"- A claimed entropy of {cfg['claimed_h']} bits/sample was supplied, so H_I = min(claimed, estimate) "
                  f"and the final value is capped at the claim (SP 800-90B 3.1.3). The estimators' own value is "
-                 f"{(r['H_iid'] if r['iid_verified'] else r['H_non_iid']):.4f}."]
+                 f"{(r['H_iid'] if r['track'] == 'IID' else r['H_non_iid']):.4f}."]
                 if cfg.get("claimed_h") is not None else [])
         md += ["**Reading these numbers**", ""] + _cap + [
+               "- The headline value uses the non-IID track, which makes no independence assumption. "
+               "Using the IID track requires claiming (and justifying from the source design) that samples are "
+               "independent and identically distributed; passing the permutation tests alone does not establish that.",
                "- The non-IID track is deliberately conservative. Even ideal uniform 8-bit data typically assesses "
                "well below 8 bits per sample at 1M samples (about 6.6 to 6.9 in tests), while the IID track gives "
                "about 7.9. A non-IID value below the symbol size is not a defect by itself.",
@@ -828,7 +931,7 @@ def build_report(outdir: Path):
     md += ["## 5. NIST SP 800-22 statistical tests", ""]
     if nist_block:
         rows_n, alines, flagged, notes, low = nist_block
-        md += [f"Pure-Python implementation, {nist['n_seq']} sequences x {nist['seq_len']:,} bits, alpha = {nist['alpha']}"
+        md += [f"Pure-Python implementation, {_seq(nist['n_seq'])} x {nist['seq_len']:,} bits, alpha = {nist['alpha']}"
                + (", Linear Complexity omitted" if cfg.get("skip_linear_complexity") else "")
                + ". Non-overlapping Template runs one template (`000000001`), not all 148. "
                "Not the official NIST STS; cross-check before any formal claim.", "",
@@ -971,6 +1074,14 @@ def main():
     ap.add_argument("--chunks", type=int, default=1, help="number of 1M-sample chunks to assess with 90B")
     ap.add_argument("--samples-per-chunk", type=int, default=1_000_000)
     ap.add_argument("--no-iid", action="store_true", help="skip ea_iid")
+    ap.add_argument("--calibrate", type=int, default=0, metavar="N",
+                    help="also run ea_non_iid on N ideal-random datasets of the same size, as a baseline "
+                         "(about 20 is plenty for 1-bit samples; slower for 8-bit). With --report-only it "
+                         "adds the baseline to an existing results folder")
+    ap.add_argument("--track", choices=["non-iid", "auto", "iid"], default="non-iid",
+                    help="entropy track used for the headline result. non-iid (default): conservative, "
+                         "needs no IID claim. auto/iid: use the IID estimate only if every IID check passes "
+                         "(an IID claim also needs a design justification, not just passing tests)")
     ap.add_argument("--restart-file", default=None,
                     help="restart data: 1000 restarts x 1000 samples, one restart per row, same sample layout")
     ap.add_argument("--claimed-h", type=float, default=None,
@@ -985,10 +1096,27 @@ def main():
     args = ap.parse_args()
 
     if args.report_only:
-        print(f"Report written: {build_report(Path(args.report_only))}")
+        rdir = Path(args.report_only)
+        if args.calibrate > 0:
+            v3 = None
+            os.environ["PATH"] = str(LOCAL / "bin") + os.pathsep + os.environ.get("PATH", "")
+            jp = rdir / "raw_summary.json"
+            S = json.loads(jp.read_text())
+            if "sp800_90b" not in S:
+                sys.exit("no SP 800-90B result in that folder to calibrate against")
+            r0 = S["sp800_90b"]
+            r0["calibration"] = calibrate(r0["bits_per_sample"], r0["samples_per_chunk"], args.calibrate, rdir)
+            jp.write_text(json.dumps(S, indent=2))
+        print(f"Report written: {build_report(rdir)}")
         return
     if not args.data:
         ap.error("the data file is required (or use --report-only DIR)")
+    if not Path(args.data).is_file():
+        ap.error(f"data file not found: {args.data}")
+    if args.restart_file and not Path(args.restart_file).is_file():
+        ap.error(f"restart file not found: {args.restart_file}  "
+                 f"(it must be a real file of 1000 restarts x 1000 samples; "
+                 f"leave --restart-file out if you do not have restart data yet)")
 
     v3 = load_v3(args.v3)
     v3.add_prefix_to_path(LOCAL)

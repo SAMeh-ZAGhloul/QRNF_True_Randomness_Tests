@@ -21,6 +21,7 @@
     "chunks": 1,
     "samples_per_chunk": 1000000,
     "no_iid": false,
+    "track": "non-iid",
     "restart_file": null,
     "claimed_h": null,
     "seq_len": 1000000,
@@ -32,7 +33,7 @@
   },
   "stages": {
     "diagnostics": "ran",
-    "sp800_90b": "skipped (tool not found: ea_non_iid is not on PATH (run --setup sp80090b))",
+    "sp800_90b": "ran",
     "nist": "ran",
     "dieharder": "skipped (insufficient data: 0.1 MB, needs about 100 MB)",
     "practrand": "ran",
@@ -138,6 +139,119 @@
       "zlib-9": 1.000368,
       "bz2": 1.007432,
       "lzma": 1.000544
+    }
+  },
+  "sp800_90b": {
+    "bits_per_sample": 1,
+    "chunks": 1,
+    "samples_per_chunk": 1000000,
+    "non_iid": [
+      {
+        "H_original": 0.871715,
+        "final": 0.871715,
+        "estimators": [
+          [
+            "Most Common Value Estimate",
+            0.991795
+          ],
+          [
+            "Collision Test Estimate",
+            0.930609
+          ],
+          [
+            "Markov Test Estimate",
+            0.99692
+          ],
+          [
+            "Compression Test Estimate",
+            0.871715
+          ],
+          [
+            "T-Tuple Test Estimate",
+            0.933045
+          ],
+          [
+            "LRS Test Estimate",
+            0.96721
+          ],
+          [
+            "Multi Most Common in Window (MultiMCW) Prediction Test Estimate",
+            0.997148
+          ],
+          [
+            "Lag Prediction Test Estimate",
+            0.997329
+          ],
+          [
+            "Multi Markov Model with Counting (MultiMMC) Prediction Test Estimate",
+            0.99561
+          ],
+          [
+            "LZ78Y Prediction Test Estimate",
+            0.992938
+          ]
+        ]
+      }
+    ],
+    "iid": [
+      {
+        "H_original": 0.991795,
+        "final": 0.991795,
+        "estimators": [],
+        "iid_checks": [
+          [
+            "Passed",
+            "chi square tests"
+          ],
+          [
+            "Passed",
+            "length of longest repeated substring test"
+          ],
+          [
+            "Passed",
+            "IID permutation tests"
+          ]
+        ],
+        "iid_ok": true
+      }
+    ],
+    "H_non_iid": 0.871715,
+    "iid_verified": true,
+    "H_iid": 0.991795,
+    "track": "non-IID",
+    "track_requested": "non-iid",
+    "H_I": 0.871715,
+    "H_final": 0.871715,
+    "calibration": {
+      "trials": 20,
+      "values": [
+        0.847454,
+        0.825444,
+        0.875639,
+        0.900275,
+        0.848377,
+        0.835246,
+        0.85341,
+        0.825418,
+        0.863536,
+        0.840514,
+        0.840668,
+        0.901458,
+        0.851268,
+        0.843259,
+        0.871463,
+        0.849752,
+        0.815706,
+        0.861761,
+        0.858024,
+        0.829205
+      ],
+      "limiting": {
+        "Compression Test Estimate": 18,
+        "Collision Test Estimate": 2
+      },
+      "sample_bits": 1,
+      "samples": 1000000
     }
   },
   "stream_size": 125000,
