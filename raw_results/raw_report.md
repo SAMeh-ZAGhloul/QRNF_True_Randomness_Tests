@@ -1,6 +1,6 @@
 # Raw Entropy Source Assessment: `sonicium-q135-channel134-bin.bin`
 
-**Generated:** 16 October 2026 09:19  
+**Generated:** 16 October 2026 12:29  
 **Data:** 1,701,800 samples of 1 bit(s) (0.21 MB)  
 **Tool:** `qrng_raw_entropy_tests.py`
 
@@ -12,7 +12,7 @@
 |---|---|---|
 | Diagnostics | Flags: non-uniform symbol distribution, non-stationary across slices | Shannon 1.000 / 1 bits; MCV min-entropy 0.988 / 1 bits |
 | SP 800-90B | **0.8568 bits/sample** (0.8568 per bit) | 1 x 1,000,000 samples, non-IID track, restart test NOT run |
-| NIST SP 800-22 | 10 PASS, 5 FAIL, 26 N/A (of 41 test rows); flagged: 01 Frequency (Monobit), 03 Runs, 06 DFT (Spectral), 13 Cumulative Sums #1, 13 Cumulative Sums #2 | 1 sequence x 1,000,000 bits (weak sample) |
+| NIST SP 800-22 | 10 PASS, 4 FAIL, 27 N/A (of 41 test rows); flagged: 01 Frequency (Monobit), 03 Runs, 13 Cumulative Sums #1, 13 Cumulative Sums #2 | 17 sequences x 100,000 bits (weak sample) |
 | Dieharder | not run | skipped (insufficient data: 0.2 MB, needs about 100 MB) |
 | PractRand | 6 failure/suspicious, 10 unusual | evaluated up to 2^16 bytes |
 | TestU01 | not run | skipped (insufficient data: 0.2 MB, needs about 944 MB) |
@@ -20,9 +20,11 @@
 **Key findings**
 
 - Basic diagnostics flag: non-uniform symbol distribution, non-stationary across slices.
+- **The bias is not constant over the capture** (see the slice and window tables in section 3). SP 800-90B estimates from one chunk are then a snapshot: assess several chunks across time, and expect time-varying bias to trigger PractRand's frequency-type tests (constant bias of the same size does not, in simulation).
 - The symbol distribution is not uniform (chi-square p = 5.9e-18) (50.3309% ones): a small bias that costs min-entropy (most-common-value bound 0.9877 of 1 bits).
 - Assessed min-entropy: **0.8568 bits per 1-bit sample (85.7% of nominal)**, non-IID track.
-- SP 800-22 flags (pass-proportion rule): 01 Frequency (Monobit), 03 Runs, 06 DFT (Spectral), 13 Cumulative Sums #1, 13 Cumulative Sums #2. See section 5 for how likely that is by chance.
+- **The IID checks FAILED**: the IID assumption is rejected, so only the non-IID estimate is valid; do not use the IID value.
+- SP 800-22 flags (pass-proportion rule): 01 Frequency (Monobit), 03 Runs, 13 Cumulative Sums #1, 13 Cumulative Sums #2 (03 Runs p = 0 is the Monobit prerequisite failing, not separate evidence). See section 5 for how likely that is by chance.
 - PractRand reported 6 suspicious/failing result(s); see section 7.
 
 This is a raw noise-source assessment. The headline number is the SP 800-90B min-entropy; verdicts of the general statistical suites on unconditioned data are diagnostics only (raw noise is normally biased or correlated).
@@ -40,7 +42,7 @@ This is a raw noise-source assessment. The headline number is the SP 800-90B min
 | SP 800-90B chunks | 1 x 1,000,000 samples |
 | Claimed entropy | none given |
 | Restart file | none |
-| NIST sequence length / alpha | 1,000,000 bits / 0.01 |
+| NIST sequence length / alpha | 100,000 bits / 0.01 |
 
 ---
 
@@ -80,6 +82,31 @@ This is a raw noise-source assessment. The headline number is the SP 800-90B min
 
 With 16 lags the smallest p-value is expected to be about 0.06 by chance. A lag is flagged only below 6.3e-05 (0.1% family-wise level, Bonferroni). The smallest observed is 0.07886.
 
+**Bias over time (10 consecutive slices)**
+
+| Slice | Bits | Ones | Ones fraction | z vs overall mean |
+|---|---|---|---|---|
+| 1 | 170,180 | 86,350 | 50.7404% | +3.38 |
+| 2 | 170,180 | 85,620 | 50.3114% | -0.16 |
+| 3 | 170,180 | 85,763 | 50.3955% | +0.53 |
+| 4 | 170,180 | 85,745 | 50.3849% | +0.45 |
+| 5 | 170,180 | 85,438 | 50.2045% | -1.04 |
+| 6 | 170,180 | 84,892 | 49.8837% | -3.69 |
+| 7 | 170,180 | 85,299 | 50.1228% | -1.72 |
+| 8 | 170,180 | 85,771 | 50.4002% | +0.57 |
+| 9 | 170,180 | 85,693 | 50.3543% | +0.19 |
+| 10 | 170,180 | 85,961 | 50.5118% | +1.49 |
+
+**Is the mean constant over time? (overdispersion of window means)**
+
+| Window | Windows | chi2 / dof | p-value | Largest |z| (window #) |
+|---|---|---|---|---|
+| 1,000 | 1701 | 1680.7 / 1700 | 0.6256 | 3.46 (#94) |
+| 10,000 | 170 | 206.4 / 169 | 0.02641 | 2.98 (#99) |
+| 100,000 | 17 | 50.8 / 16 | 1.689e-05 | 3.93 (#0) |
+
+A small p-value means the mean varies over time by more than sampling noise at that window scale (drift, a warm-up transient, or interference). Several scales help locate its timescale.
+
 ---
 
 ## 4. NIST SP 800-90B entropy assessment
@@ -106,6 +133,21 @@ With 16 lags the smallest p-value is expected to be about 0.06 by chance. A lag 
 | LZ78Y Prediction Test Estimate | 0.9868 | 0.9868 |
 
 **Limiting estimator (chunk 1):** Compression Test Estimate = 0.8568; all other estimators are between 0.9166 and 0.9953.
+
+**Calibration against ideal random data**
+
+The same estimator was run on 20 freshly generated ideal random datasets of the same size (1,000,000 samples of 1 bit(s)). Non-IID estimates of ideal data are well below the symbol size because the estimators are conservative at this sample size.
+
+| Baseline (ideal random) | Value |
+|---|---|
+| Minimum | 0.8138 |
+| Median | 0.8512 |
+| Maximum | 0.9097 |
+| Limiting estimator (trials) | Compression Test Estimate (18), Collision Test Estimate (1), Multi Most Common in Window (MultiMCW) Prediction Test Estimate (1) |
+| Your non-IID value | **0.8568** |
+| Baseline runs below your value | 11 of 20 |
+
+Your value lies within the range ideal random data produces, so the gap to the symbol size is explained by estimator conservatism, not by detected structure. Note this baseline reflects ideal data; a biased source is expected to sit slightly lower.
 
 **IID checks (chunk 1)**
 
@@ -136,38 +178,54 @@ With 16 lags the smallest p-value is expected to be about 0.06 by chance. A lag 
 
 ## 5. NIST SP 800-22 statistical tests
 
-Pure-Python implementation, 1 sequence x 1,000,000 bits, alpha = 0.01. Non-overlapping Template runs one template (`000000001`), not all 148. Not the official NIST STS; cross-check before any formal claim.
+Pure-Python implementation, 17 sequences x 100,000 bits, alpha = 0.01. Non-overlapping Template runs one template (`000000001`), not all 148. Not the official NIST STS; cross-check before any formal claim.
 
 | Test | Passed | Proportion | Uniformity P | Lowest p | Verdict |
 |---|---|---|---|---|---|
-| 01 Frequency (Monobit) | 0/1 | 0.000 | 0.437 | 3.592e-11 | FAIL |
-| 02 Block Frequency | 1/1 | 1.000 | 0.437 | 0.6395 | PASS |
-| 03 Runs | 0/1 | 0.000 | 0.437 | 0 | FAIL |
-| 04 Longest Run of Ones | 1/1 | 1.000 | 0.437 | 0.8119 | PASS |
-| 05 Binary Matrix Rank | 1/1 | 1.000 | 0.437 | 0.5323 | PASS |
-| 06 DFT (Spectral) | 0/1 | 0.000 | 0.437 | 0.004195 | FAIL |
-| 07 Non-overlapping Template | 1/1 | 1.000 | 0.437 | 0.01794 | PASS |
-| 08 Overlapping Template | 1/1 | 1.000 | 0.437 | 0.3466 | PASS |
-| 09 Maurer's Universal | 1/1 | 1.000 | 0.437 | 0.5423 | PASS |
-| 10 Linear Complexity | 1/1 | 1.000 | 0.437 | 0.2363 | PASS |
-| 11 Serial #1 | 1/1 | 1.000 | 0.437 | 0.04827 | PASS |
-| 11 Serial #2 | 1/1 | 1.000 | 0.437 | 0.06777 | PASS |
-| 12 Approximate Entropy | 1/1 | 1.000 | 0.437 | 0.01561 | PASS |
-| 13 Cumulative Sums #1 | 0/1 | 0.000 | 0.437 | 1.436e-12 | FAIL |
-| 13 Cumulative Sums #2 | 0/1 | 0.000 | 0.437 | 6.274e-11 | FAIL |
+| 01 Frequency (Monobit) | 12/17 | 0.706 | 0.000 | 1.667e-09 | FAIL |
+| 02 Block Frequency | 17/17 | 1.000 | 0.163 | 0.1856 | PASS |
+| 03 Runs | 14/17 | 0.824 | 0.057 | 0 (Monobit prerequisite failed) | FAIL |
+| 04 Longest Run of Ones | 17/17 | 1.000 | 0.625 | 0.02645 | PASS |
+| 05 Binary Matrix Rank | 17/17 | 1.000 | 0.746 | 0.04555 | PASS |
+| 06 DFT (Spectral) | 16/17 | 0.941 | 0.746 | 0.009803 | PASS |
+| 07 Non-overlapping Template | 17/17 | 1.000 | 0.223 | 0.03281 | PASS |
+| 08 Overlapping Template | 16/17 | 0.941 | 0.301 | 0.007079 | PASS |
+| 09 Maurer's Universal | n/a | n/a | n/a | n/a | N/A (not applicable at this sequence length) |
+| 10 Linear Complexity | 17/17 | 1.000 | 0.854 | 0.05723 | PASS |
+| 11 Serial #1 | 17/17 | 1.000 | 0.012 | 0.04096 | PASS |
+| 11 Serial #2 | 17/17 | 1.000 | 0.936 | 0.1022 | PASS |
+| 12 Approximate Entropy | 17/17 | 1.000 | 0.000 | 0.08948 | PASS |
+| 13 Cumulative Sums #1 | 12/17 | 0.706 | 0.000 | 2.851e-09 | FAIL |
+| 13 Cumulative Sums #2 | 12/17 | 0.706 | 0.000 | 2.251e-09 | FAIL |
 | 14 Random Excursions (8 states) | n/a | n/a | n/a | n/a | N/A (fewer than 500 cycles in every sequence) |
 | 15 Random Excursions Variant (18 states) | n/a | n/a | n/a | n/a | N/A (fewer than 500 cycles in every sequence) |
 
 ### Analysis
 
-With 1 sequence at alpha = 0.01, the acceptable pass proportion is **0.6915 to 1.0**, so at least **1 of 1** sequences must pass each test.
+With 17 sequences at alpha = 0.01, the acceptable pass proportion is **0.9176 to 1.0**, so at least **16 of 17** sequences must pass each test.
 
-With only 1 sequence, the pass-proportion rule reduces to "did the p-value reach alpha"; read the individual p-values instead.
-Smallest p-value: **0** (03 Runs). Counting Monobit and Cumulative Sums as one row (they measure the same imbalance), there are 13 effectively independent rows; the probability that the smallest of 13 p-values is this small or smaller by chance (Sidak) is about **0.0%**.
+**Tests flagged on the pass-proportion rule:**
+
+| Test | Failing sequences | Sequence (p-value) | P(>= that many failures | 17 seq, alpha=0.01) |
+|---|---|---|---|
+| 01 Frequency (Monobit) | 5 | #0 (p=1.667e-09), #1 (p=0.001942), #4 (p=0.002893), #5 (p=5.608e-05), #15 (p=3.25e-05) | 5.6e-07 |
+| 03 Runs | 3 | #0 (p=0), #5 (p=0), #15 (p=0) | 0.000612 |
+| 13 Cumulative Sums #1 | 5 | #0 (p=2.851e-09), #1 (p=0.001818), #4 (p=0.0009394), #5 (p=9.667e-05), #15 (p=4.919e-05) | 5.6e-07 |
+| 13 Cumulative Sums #2 | 5 | #0 (p=2.251e-09), #1 (p=0.00155), #4 (p=0.004411), #5 (p=7.773e-05), #15 (p=3.657e-05) | 5.6e-07 |
+
+Across the 14 full-length test rows, the chance that at least one row shows 5 or more failures purely by chance is about **0.0%**.
+The chance that at least 4 rows do is about **0.0%**.
+
+**Overall:** 20 of 238 valid p-values are below 0.01 (expected about 2.4; naive binomial tail probability 7.68e-13).
+Pooled p-values of the full-length tests (238) vs uniform: Kolmogorov-Smirnov p = 2.95e-06, mean p = 0.399.
 
 **Clusters (3 or more low p-values in one sequence):**
 
-- Sequence #0: 01 Frequency (Monobit) (p=3.592e-11), 03 Runs (p=0), 06 DFT (Spectral) (p=0.004195), 13 Cumulative Sums #1 (p=1.436e-12), 13 Cumulative Sums #2 (p=6.274e-11)
+- Sequence #0: 01 Frequency (Monobit) (p=1.667e-09), 03 Runs (p=0), 13 Cumulative Sums #1 (p=2.851e-09), 13 Cumulative Sums #2 (p=2.251e-09)
+- Sequence #1: 01 Frequency (Monobit) (p=0.001942), 13 Cumulative Sums #1 (p=0.001818), 13 Cumulative Sums #2 (p=0.00155)
+- Sequence #4: 01 Frequency (Monobit) (p=0.002893), 06 DFT (Spectral) (p=0.009803), 13 Cumulative Sums #1 (p=0.0009394), 13 Cumulative Sums #2 (p=0.004411)
+- Sequence #5: 01 Frequency (Monobit) (p=5.608e-05), 03 Runs (p=0), 13 Cumulative Sums #1 (p=9.667e-05), 13 Cumulative Sums #2 (p=7.773e-05)
+- Sequence #15: 01 Frequency (Monobit) (p=3.25e-05), 03 Runs (p=0), 13 Cumulative Sums #1 (p=4.919e-05), 13 Cumulative Sums #2 (p=3.657e-05)
 
 Monobit and Cumulative Sums all measure ones/zeros imbalance, so they are strongly correlated: treat those as one event, not several.
 
@@ -177,9 +235,24 @@ Monobit and Cumulative Sums all measure ones/zeros imbalance, so they are strong
 |---|---|---|
 | 0 | 01 Frequency (Monobit) | 0.000000 |
 | 0 | 03 Runs | 0.000000 |
-| 0 | 06 DFT (Spectral) | 0.004195 |
 | 0 | 13 Cumulative Sums #1 | 0.000000 |
 | 0 | 13 Cumulative Sums #2 | 0.000000 |
+| 1 | 01 Frequency (Monobit) | 0.001942 |
+| 1 | 13 Cumulative Sums #1 | 0.001818 |
+| 1 | 13 Cumulative Sums #2 | 0.001550 |
+| 2 | 08 Overlapping Template | 0.007079 |
+| 4 | 01 Frequency (Monobit) | 0.002893 |
+| 4 | 06 DFT (Spectral) | 0.009803 |
+| 4 | 13 Cumulative Sums #1 | 0.000939 |
+| 4 | 13 Cumulative Sums #2 | 0.004411 |
+| 5 | 01 Frequency (Monobit) | 0.000056 |
+| 5 | 03 Runs | 0.000000 |
+| 5 | 13 Cumulative Sums #1 | 0.000097 |
+| 5 | 13 Cumulative Sums #2 | 0.000078 |
+| 15 | 01 Frequency (Monobit) | 0.000032 |
+| 15 | 03 Runs | 0.000000 |
+| 15 | 13 Cumulative Sums #1 | 0.000049 |
+| 15 | 13 Cumulative Sums #2 | 0.000037 |
 
 On unconditioned raw data, failures here point to bias or correlation the conditioner must remove.
 
@@ -245,7 +318,7 @@ Not run: skipped (insufficient data: 0.2 MB, needs about 944 MB).
 ## 10. Limitations of this run
 
 - No restart test was run, so the entropy assessment is incomplete (SP 800-90B 3.1.4)
-- NIST SP 800-22: only 1 sequence (NIST recommends about 100 at alpha = 0.01); the pass-proportion results are noisy
+- NIST SP 800-22: only 17 sequences (NIST recommends about 100 at alpha = 0.01); the pass-proportion results are noisy
 - PractRand only reached 2^16 bytes (its power grows with length; weak sources typically fail at MB to GB scales)
 
 ## 11. Recommended next steps
@@ -264,7 +337,7 @@ Not run: skipped (insufficient data: 0.2 MB, needs about 944 MB).
 ## Appendix: reproduction
 
 ```bash
-python3 qrng_raw_entropy_tests.py sonicium-q135-channel134-bin.bin --out raw_results --sample-bits 1 --packed
+python3 qrng_raw_entropy_tests.py sonicium-q135-channel134-bin.bin --out raw_results --sample-bits 1 --packed --seq-len 100000
 ```
 
 Per-tool outputs in this folder: `ea_non_iid_chunk*.txt`, `ea_iid_chunk*.txt`, `ea_restart.txt`, `nist_summary.csv`, `nist_pvalues.csv`, `dieharder_report.txt`, `practrand_report.txt`, `testu01_*_report.txt`, `raw_summary.json`.

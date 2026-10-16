@@ -178,6 +178,23 @@ def diagnostics(sym, sb, max_n):
     if tbl.shape[1] > 1:
         homog_p = float(stats.chi2_contingency(tbl)[1])
 
+    # time variation of the mean: overdispersion of window means at several scales
+    mu, sd = float(s.mean()), float(s.std())
+    drift = []
+    if sd > 0:
+        for w in (1_000, 10_000, 100_000):
+            kwin = n // w
+            if kwin < 10:
+                continue
+            wm = s[: kwin * w].reshape(kwin, w).mean(axis=1)
+            z = (wm - mu) / (sd / math.sqrt(w))
+            chi2w = float((z ** 2).sum())
+            drift.append({"window": w, "n_windows": kwin, "chi2": chi2w, "dof": kwin - 1,
+                          "p": float(special.gammaincc((kwin - 1) / 2, chi2w / 2)),
+                          "max_abs_z": float(np.abs(z).max()), "argmax": int(np.abs(z).argmax())})
+    slice_ones = [int(pt.sum()) for pt in parts] if sb == 1 else None
+    slice_sizes = [int(len(pt)) for pt in parts] if sb == 1 else None
+
     nbytes = 2_000_000
     sample = s[: max(1, (nbytes * 8) // sb)]
     packed = np.packbits(symbols_to_bits(sample, sb)).tobytes()
@@ -191,6 +208,7 @@ def diagnostics(sym, sb, max_n):
         "chi2": chi2, "chi2_p": chi_p, "lags": lags,
         "longest_run": longest, "expected_longest_run": exp_longest,
         "homogeneity_p": homog_p, "homogeneity_low_expected": low_expected,
+        "drift": drift, "slice_ones": slice_ones, "slice_sizes": slice_sizes,
         "compression": comp,
     }
 
@@ -566,8 +584,10 @@ def nist_analysis(outdir, nist):
             rows.append([t, "n/a", "n/a", "n/a", "n/a", "N/A (not applicable at this sequence length)"])
             continue
         passed = int(round(r["proportion"] * r["n_p"]))
+        lp_ = float(lowest.get(t, float("nan")))
+        lp_txt = ("0 (Monobit prerequisite failed)" if t.startswith("03 Runs") and lp_ == 0.0 else _fp(lp_))
         rows.append([t, f"{passed}/{int(r['n_p'])}", _fx(r["proportion"], 3), _fx(r["uniformity_P"], 3),
-                     _fp(float(lowest.get(t, float('nan')))), r["verdict"]])
+                     lp_txt, r["verdict"]])
     for g, lst in rex.items():
         if not lst:
             continue
@@ -623,6 +643,12 @@ def nist_analysis(outdir, nist):
         grp = [t for t in names if t.startswith(("01 Frequency", "13 Cumulative Sums"))]
         t_eff = len(names) - len(grp) + (1 if grp else 0)
         fp_ = pv[pv.test.isin(names)]
+        runs0 = fp_[fp_.test.str.startswith("03 Runs") & (fp_.p == 0)]
+        if len(runs0):
+            fp_ = fp_.drop(runs0.index)
+            t_eff -= 1
+            lines.append("**03 Runs returned p = 0 because the Monobit prerequisite failed** (NIST requires "
+                         "|ones fraction - 1/2| < 2/sqrt(n)); that is the same bias again, not separate evidence.")
         if len(fp_):
             i = fp_.p.idxmin()
             pmin, tname = float(fp_.loc[i, "p"]), fp_.loc[i, "test"]
@@ -698,12 +724,21 @@ def build_report(outdir: Path):
             flags.append("serial correlation")
         if d.get("homogeneity_p") is not None and d["homogeneity_p"] < 0.001 and not d["homogeneity_low_expected"]:
             flags.append("non-stationary across slices")
+        elif any(x["p"] < 0.001 for x in d.get("drift", [])):
+            flags.append("mean varies over time (window means)")
         if min(d["compression"].values()) < 0.99:
             flags.append("compressible")
         summ_rows.append(["Diagnostics", "Flags: " + (", ".join(flags) if flags else "none"),
                           f"Shannon {d['shannon']:.3f} / {sb} bits; MCV min-entropy {d['mcv_min_entropy']:.3f} / {sb} bits"])
         if flags:
             findings.append("Basic diagnostics flag: " + ", ".join(flags) + ".")
+        _dr = [x for x in d.get("drift", []) if x["p"] < 0.001]
+        if _dr or (d.get("homogeneity_p") is not None and d["homogeneity_p"] < 0.001
+                   and not d["homogeneity_low_expected"]):
+            findings.append("**The bias is not constant over the capture** (see the slice and window tables in "
+                            "section 3). SP 800-90B estimates from one chunk are then a snapshot: assess several "
+                            "chunks across time, and expect time-varying bias to trigger PractRand's frequency-type "
+                            "tests (constant bias of the same size does not, in simulation).")
         if d["chi2_p"] < 0.01:
             extra = (f" ({d['ones'] / d['n']:.4%} ones)" if d.get("ones") is not None else "")
             findings.append(f"The symbol distribution is not uniform (chi-square p = {d['chi2_p']:.3g}){extra}: "
@@ -719,6 +754,9 @@ def build_report(outdir: Path):
                           f"{r['chunks']} x {r['samples_per_chunk']:,} samples, {track} track, {rtxt}"])
         findings.append(f"Assessed min-entropy: **{r['H_final']:.4f} bits per {sb}-bit sample "
                         f"({r['H_final'] / sb:.1%} of nominal)**, {track} track.")
+        if r["iid"] and not r["iid_verified"]:
+            findings.append("**The IID checks FAILED**: the IID assumption is rejected, so only the non-IID "
+                            "estimate is valid; do not use the IID value.")
         if restart and restart.get("sanity_failed"):
             findings.append("**The restart sanity check FAILED**: the source does not restart independently "
                             "or H_I is overstated, so no valid entropy claim exists.")
@@ -745,7 +783,9 @@ def build_report(outdir: Path):
                           + (f"; flagged: {', '.join(flagged)}" if flagged else ""),
                           f"{_seq(m)} x {nist['seq_len']:,} bits ({adequacy} sample)"])
         if flagged:
+            _rp = any(x[0].startswith("03 Runs") and "prerequisite" in str(x[4]) for x in rows_n)
             findings.append("SP 800-22 flags (pass-proportion rule): " + ", ".join(flagged) +
+                            (" (03 Runs p = 0 is the Monobit prerequisite failing, not separate evidence)" if _rp else "") +
                             ". See section 5 for how likely that is by chance.")
         limits += [f"NIST SP 800-22: {x}" for x in notes]
         if m < 100:
@@ -836,6 +876,21 @@ def build_report(outdir: Path):
             f"With 16 lags the smallest p-value is expected to be about 0.06 by chance. A lag is flagged only "
             f"below {0.001 / 16:.2g} (0.1% family-wise level, Bonferroni). The smallest observed is "
             f"{_fp(min(x[2] for x in d['lags']))}.", ""]
+        if d.get("slice_ones"):
+            mu_ = d["ones"] / d["n"]
+            srows = []
+            for i, (o, sz) in enumerate(zip(d["slice_ones"], d["slice_sizes"]), 1):
+                z_ = (o / sz - mu_) / math.sqrt(mu_ * (1 - mu_) / sz)
+                srows.append([i, f"{sz:,}", f"{o:,}", f"{o / sz:.4%}", f"{z_:+.2f}"])
+            md += ["**Bias over time (10 consecutive slices)**", "",
+                   md_table(["Slice", "Bits", "Ones", "Ones fraction", "z vs overall mean"], srows), ""]
+        if d.get("drift"):
+            md += ["**Is the mean constant over time? (overdispersion of window means)**", "",
+                   md_table(["Window", "Windows", "chi2 / dof", "p-value", "Largest |z| (window #)"],
+                            [[f"{x['window']:,}", x["n_windows"], f"{x['chi2']:.1f} / {x['dof']}", _fp(x["p"]),
+                              f"{x['max_abs_z']:.2f} (#{x['argmax']})"] for x in d["drift"]]), "",
+                   "A small p-value means the mean varies over time by more than sampling noise at that window "
+                   "scale (drift, a warm-up transient, or interference). Several scales help locate its timescale.", ""]
     else:
         md += ["Not run.", ""]
     md += ["---", ""]

@@ -21,11 +21,11 @@
     "chunks": 1,
     "samples_per_chunk": 1000000,
     "no_iid": false,
-    "calibrate": 0,
+    "calibrate": 20,
     "track": "non-iid",
     "restart_file": null,
     "claimed_h": null,
-    "seq_len": 1000000,
+    "seq_len": 100000,
     "nist_max_seq": 50,
     "alpha": 0.01,
     "workers": null,
@@ -137,6 +137,59 @@
     "expected_longest_run": 20.69863006700466,
     "homogeneity_p": 0.00018626913143851686,
     "homogeneity_low_expected": false,
+    "drift": [
+      {
+        "window": 1000,
+        "n_windows": 1701,
+        "chi2": 1680.7327186662897,
+        "dof": 1700,
+        "p": 0.6256080890311224,
+        "max_abs_z": 3.4590106773092337,
+        "argmax": 94
+      },
+      {
+        "window": 10000,
+        "n_windows": 170,
+        "chi2": 206.39269656264045,
+        "dof": 169,
+        "p": 0.026412828426897336,
+        "max_abs_z": 2.9819527329638422,
+        "argmax": 99
+      },
+      {
+        "window": 100000,
+        "n_windows": 17,
+        "chi2": 50.83020144832112,
+        "dof": 16,
+        "p": 1.6891869858217457e-05,
+        "max_abs_z": 3.9343156207038836,
+        "argmax": 0
+      }
+    ],
+    "slice_ones": [
+      86350,
+      85620,
+      85763,
+      85745,
+      85438,
+      84892,
+      85299,
+      85771,
+      85693,
+      85961
+    ],
+    "slice_sizes": [
+      170180,
+      170180,
+      170180,
+      170180,
+      170180,
+      170180,
+      170180,
+      170180,
+      170180,
+      170180
+    ],
     "compression": {
       "zlib-9": 1.000333764249618,
       "bz2": 1.0063274180279704,
@@ -223,6 +276,38 @@
     "track": "non-IID",
     "track_requested": "non-iid",
     "H_I": 0.856804,
+    "calibration": {
+      "trials": 20,
+      "values": [
+        0.859682,
+        0.832503,
+        0.837723,
+        0.845725,
+        0.813782,
+        0.879683,
+        0.851161,
+        0.82393,
+        0.841528,
+        0.873287,
+        0.895907,
+        0.888298,
+        0.909705,
+        0.837612,
+        0.873855,
+        0.847039,
+        0.880127,
+        0.831508,
+        0.866573,
+        0.845062
+      ],
+      "limiting": {
+        "Compression Test Estimate": 18,
+        "Collision Test Estimate": 1,
+        "Multi Most Common in Window (MultiMCW) Prediction Test Estimate": 1
+      },
+      "sample_bits": 1,
+      "samples": 1000000
+    },
     "H_final": 0.856804
   },
   "stream_size": 212725,
@@ -230,107 +315,107 @@
     "records": [
       {
         "test": "01 Frequency (Monobit)",
-        "n_p": 1,
-        "proportion": 0.0,
-        "uniformity_P": 0.43727418891386727,
+        "n_p": 17,
+        "proportion": 0.7058823529411765,
+        "uniformity_P": 8.138233962490274e-08,
         "verdict": "FAIL"
       },
       {
         "test": "02 Block Frequency",
-        "n_p": 1,
+        "n_p": 17,
         "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "uniformity_P": 0.16260626219029947,
         "verdict": "PASS"
       },
       {
         "test": "03 Runs",
-        "n_p": 1,
-        "proportion": 0.0,
-        "uniformity_P": 0.43727418891386727,
+        "n_p": 17,
+        "proportion": 0.8235294117647058,
+        "uniformity_P": 0.05661599011195793,
         "verdict": "FAIL"
       },
       {
         "test": "04 Longest Run of Ones",
-        "n_p": 1,
+        "n_p": 17,
         "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "uniformity_P": 0.6248720231654168,
         "verdict": "PASS"
       },
       {
         "test": "05 Binary Matrix Rank",
-        "n_p": 1,
+        "n_p": 17,
         "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "uniformity_P": 0.7457908772633434,
         "verdict": "PASS"
       },
       {
         "test": "06 DFT (Spectral)",
-        "n_p": 1,
-        "proportion": 0.0,
-        "uniformity_P": 0.43727418891386727,
-        "verdict": "FAIL"
+        "n_p": 17,
+        "proportion": 0.9411764705882353,
+        "uniformity_P": 0.7457908772633433,
+        "verdict": "PASS"
       },
       {
         "test": "07 Non-overlapping Template",
-        "n_p": 1,
+        "n_p": 17,
         "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "uniformity_P": 0.22344171340254632,
         "verdict": "PASS"
       },
       {
         "test": "08 Overlapping Template",
-        "n_p": 1,
-        "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "n_p": 17,
+        "proportion": 0.9411764705882353,
+        "uniformity_P": 0.30067888580543983,
         "verdict": "PASS"
       },
       {
         "test": "09 Maurer's Universal",
-        "n_p": 1,
-        "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
-        "verdict": "PASS"
+        "n_p": 0,
+        "proportion": null,
+        "uniformity_P": null,
+        "verdict": "N/A"
       },
       {
         "test": "10 Linear Complexity",
-        "n_p": 1,
+        "n_p": 17,
         "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "uniformity_P": 0.8543181410004886,
         "verdict": "PASS"
       },
       {
         "test": "11 Serial #1",
-        "n_p": 1,
+        "n_p": 17,
         "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "uniformity_P": 0.011645674964272433,
         "verdict": "PASS"
       },
       {
         "test": "11 Serial #2",
-        "n_p": 1,
+        "n_p": 17,
         "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "uniformity_P": 0.9363686728046829,
         "verdict": "PASS"
       },
       {
         "test": "12 Approximate Entropy",
-        "n_p": 1,
+        "n_p": 17,
         "proportion": 1.0,
-        "uniformity_P": 0.43727418891386727,
+        "uniformity_P": 0.00013355206363408902,
         "verdict": "PASS"
       },
       {
         "test": "13 Cumulative Sums #1",
-        "n_p": 1,
-        "proportion": 0.0,
-        "uniformity_P": 0.43727418891386727,
+        "n_p": 17,
+        "proportion": 0.7058823529411765,
+        "uniformity_P": 1.354498337041878e-07,
         "verdict": "FAIL"
       },
       {
         "test": "13 Cumulative Sums #2",
-        "n_p": 1,
-        "proportion": 0.0,
-        "uniformity_P": 0.43727418891386727,
+        "n_p": 17,
+        "proportion": 0.7058823529411765,
+        "uniformity_P": 1.35449833704188e-07,
         "verdict": "FAIL"
       },
       {
@@ -516,15 +601,14 @@
         "verdict": "N/A"
       }
     ],
-    "n_seq": 1,
-    "seq_len": 1000000,
+    "n_seq": 17,
+    "seq_len": 100000,
     "alpha": 0.01,
     "n_pass": 10,
     "n_tests": 41,
     "fail": [
       "01 Frequency (Monobit)",
       "03 Runs",
-      "06 DFT (Spectral)",
       "13 Cumulative Sums #1",
       "13 Cumulative Sums #2"
     ]

@@ -1,34 +1,34 @@
-Opening file: 'cal2.bin' (SHA-256 hash 03d29ea42028768a3e507700f87e4174d3a9326e72e507dd5c38d36a67d78146)
+Opening file: 'cal2.bin' (SHA-256 hash 046d8300ed88e9d26b6cf2e825fe14ce93146c8215e182449510b95dfffe434f)
 Loaded 1000000 samples of 2 distinct 1-bit-wide symbols
 
 Running non-IID tests...
 
 Running Most Common Value Estimate...
-Literal MCV Estimate: mode = 500027, p-hat = 0.500027, p_u = 0.50131491529385452
-	Most Common Value Estimate = 0.996211 / 1 bit(s)
+Literal MCV Estimate: mode = 500423, p-hat = 0.50042299999999995, p_u = 0.50171091483484132
+	Most Common Value Estimate = 0.995072 / 1 bit(s)
 
 Running Entropic Statistic Estimates (bit strings only)...
-Literal Collision Estimate: X-bar = 2.5007689864633376, sigma-hat = 0.50000003385214908, p = 0.52517636495514741
-	Collision Test Estimate = 0.929126 / 1 bit(s)
-Literal Markov Estimate: P_0 = 0.500027, P_1 = 0.499973, P_0,0 = 0.49986500728960637, P_0,1 = 0.50013499271039363, P_1,0 = 0.50018801052858963, P_1,1 = 0.49981198947141037, p_max = 3.0617759465896914e-39
-	Markov Test Estimate = 0.999538 / 1 bit(s)
-Literal Compression Estimate: X-bar = 5.2199945901330587, sigma-hat = 1.0147621901232575, p = 0.026208238570988751
-	Compression Test Estimate = 0.875639 / 1 bit(s)
+Literal Collision Estimate: X-bar = 2.4997512742507606, sigma-hat = 0.50000056307566043, p = 0.53380089231274563
+	Collision Test Estimate = 0.905626 / 1 bit(s)
+Literal Markov Estimate: P_0 = 0.49957699999999999, P_1 = 0.50042300000000006, P_0,0 = 0.49906320559834738, P_0,1 = 0.50093679440165262, P_1,0 = 0.5000909230790751, P_1,1 = 0.4999090769209249, p_max = 3.3480828903465764e-39
+	Markov Test Estimate = 0.998530 / 1 bit(s)
+Literal Compression Estimate: X-bar = 5.2162943996893008, sigma-hat = 1.0169928352421898, p = 0.030684697928926585
+	Compression Test Estimate = 0.837723 / 1 bit(s)
 
 Running Tuple Estimates...
-Literal t-Tuple Estimate: t = 15, p-hat_max = 0.5200254334221195984256, p_u = 0.5213123153488957717272
-Literal LRS Estimate: u = 16, v = 39, p-hat = 0.50431694373801683, p_u = 0.50560481102966726
-	T-Tuple Test Estimate = 0.939780 / 1 bit(s)
-	LRS Test Estimate = 0.983918 / 1 bit(s)
+Literal t-Tuple Estimate: t = 16, p-hat_max = 0.5275569070895033130242, p_u = 0.5288428648552971900187
+Literal LRS Estimate: u = 17, v = 36, p-hat = 0.49997421064471737, p_u = 0.50126212593873642
+	T-Tuple Test Estimate = 0.919089 / 1 bit(s)
+	LRS Test Estimate = 0.996363 / 1 bit(s)
 
 Running Predictor Estimates...
-Literal MultiMCW Prediction Estimate: N = 999937, Pglobal' = 0.50167347977219667 (C = 500354) Plocal can't affect result (r = 21)
-	Multi Most Common in Window (MultiMCW) Prediction Test Estimate = 0.995179 / 1 bit(s)
-Literal Lag Prediction Estimate: N = 999999, Pglobal' = 0.50054641378193698 (C = 499258) Plocal can't affect result (r = 20)
-	Lag Prediction Test Estimate = 0.998424 / 1 bit(s)
-Literal MultiMMC Prediction Estimate: N = 999998, Pglobal' = 0.50076491483308061 (C = 499476) Plocal can't affect result (r = 24)
-	Multi Markov Model with Counting (MultiMMC) Prediction Test Estimate = 0.997795 / 1 bit(s)
-Literal LZ78Y Prediction Estimate: N = 999983, Pglobal' = 0.50119642466606995 (C = 499900) Plocal can't affect result (r = 24)
-	LZ78Y Prediction Test Estimate = 0.996552 / 1 bit(s)
+Literal MultiMCW Prediction Estimate: N = 999937, Pglobal' = 0.50211850641490874 (C = 500799) Plocal can't affect result (r = 22)
+	Multi Most Common in Window (MultiMCW) Prediction Test Estimate = 0.993900 / 1 bit(s)
+Literal Lag Prediction Estimate: N = 999999, Pglobal' = 0.50124841589617208 (C = 499960) Plocal can't affect result (r = 19)
+	Lag Prediction Test Estimate = 0.996402 / 1 bit(s)
+Literal MultiMMC Prediction Estimate: N = 999998, Pglobal' = 0.50106691601584308 (C = 499778) Plocal can't affect result (r = 20)
+	Multi Markov Model with Counting (MultiMMC) Prediction Test Estimate = 0.996925 / 1 bit(s)
+Literal LZ78Y Prediction Estimate: N = 999983, Pglobal' = 0.50131142664124706 (C = 500015) Plocal can't affect result (r = 22)
+	LZ78Y Prediction Test Estimate = 0.996221 / 1 bit(s)
 
-H_original: 0.875639
+H_original: 0.837723
